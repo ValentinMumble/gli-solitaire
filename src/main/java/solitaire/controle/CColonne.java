@@ -18,6 +18,7 @@ public class CColonne extends Colonne {
 		if (isCarteRetournable()) {
 			p.desactiverRetournerCarte();
 		}
+		p.setCorrectSize();
 	}
 	
 	public void retournerCarte() {
@@ -30,5 +31,9 @@ public class CColonne extends Colonne {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public PColonne getPresentation() {
+		return p;
 	}
 }

@@ -70,7 +70,6 @@ public class PCarte extends JPanel {
 	// public final CCarte getControle () {
 	// return (controle) ;
 	// }
-
 	public ImageIcon getIcone() {
 		return icone;
 	}

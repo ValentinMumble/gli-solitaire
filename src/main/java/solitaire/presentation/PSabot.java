@@ -15,7 +15,7 @@ public class PSabot extends JPanel {
 	private PTasDeCartes visibles;
 	
 	private RetournerTasListener rtl;
-	private RetournerTasListener rcl;
+	private RetournerCarteListener rcl;
 
 	public PSabot(CSabot cSabot, PTasDeCartes c,
 			PTasDeCartes v) {
@@ -25,7 +25,9 @@ public class PSabot extends JPanel {
 		add(cachees);
 		add(visibles);
 		cachees.setDxDy(0, 0);
-		visibles.setDxDy(30, 0);
+		visibles.setDxDy(-15, 0);
+		rtl = new RetournerTasListener();
+		rcl = new RetournerCarteListener();
 	}
 
 	public void activerRetournerCarte() {

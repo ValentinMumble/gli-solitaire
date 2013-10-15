@@ -1,16 +1,16 @@
 package solitaire.controle;
 
 import solitaire.application.Carte;
-import solitaire.application.TasDeCartesColorees;
+import solitaire.application.TasDeCartesAlternees;
 import solitaire.presentation.PTasDeCartesAlternees;
 
-public class CTasDeCartesAlternees extends TasDeCartesColorees implements
+public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 		ICTasDeCartes {
 
 	private PTasDeCartesAlternees p;
 
-	public CTasDeCartesAlternees(String nom, int c, CUsine u) {
-		super(nom, c, u);
+	public CTasDeCartesAlternees(String nom, CUsine u) {
+		super(nom, u);
 		p = new PTasDeCartesAlternees(this);
 	}
 

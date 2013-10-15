@@ -57,4 +57,8 @@ public class CSabot extends Sabot {
 			e.printStackTrace();
 		}
 	}
+	
+	public PSabot getPresentation() {
+		return p;
+	}
 }

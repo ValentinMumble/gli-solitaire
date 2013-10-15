@@ -21,10 +21,18 @@ public class PColonne extends JPanel {
 		controle = cColonne;
 		cachees = c;
 		visibles = v;
+		setLayout(null);
+		setSize(80, 200);
+		setPreferredSize(getSize());
 		add(cachees);
-		add(visibles);
+		add(visibles, 0);
 		cachees.setDxDy(0, 15);
-		visibles.setDxDy(0, 25);
+		visibles.setDxDy(0, 15);
+	}
+	
+	public void setCorrectSize() {
+		visibles.setLocation(0, cachees.getHeight()-80);
+		System.out.println("fff: "+cachees.getHeight());
 	}
 	
 	public void activerRetournerCarte() {

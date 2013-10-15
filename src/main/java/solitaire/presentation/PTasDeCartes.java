@@ -1,5 +1,7 @@
 package solitaire.presentation;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 import solitaire.controle.ICTasDeCartes;
@@ -15,25 +17,31 @@ public class PTasDeCartes extends JPanel {
 	
 	public PTasDeCartes(ICTasDeCartes c) {
 		setLayout(null);
-		setSize(200, 200);
+		setSize(72, 96);
 		setPreferredSize(getSize());
+		setOpaque(false);
 		controle = c;
 		dx = 0;
-		dy = 20;
-		x = y = 50;
+		dy = 0;
+		x = 2;
+		y = 0;
 	}
 
 	public void depiler(PCarte pc) {
 		remove(pc);
-		x += dx;
-		y += dy;
+		x -= dx;
+		y -= dy;
+		repaint();
 	}
 	
 	public void empiler(PCarte pc) {
-		add(pc);
-		x -= dx;
-		y -= dy;
+		add(pc, 0);
+		x += dx;
+		y += dy;
 		pc.setLocation(x, y);
+		setSize(getWidth()+Math.abs(dx), getHeight()+Math.abs(dy));
+		setPreferredSize(getSize());
+		repaint();
 	}
 	
 	public void setDxDy(int dx, int dy) {

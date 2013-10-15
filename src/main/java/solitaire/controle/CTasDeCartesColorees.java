@@ -25,4 +25,8 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 			p.empiler(((CCarte) c).getPresentation());
 		}
 	}
+	
+	public PTasDeCartesColorees getPresentation() {
+		return p;
+	}
 }
