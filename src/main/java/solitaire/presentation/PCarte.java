@@ -3,6 +3,10 @@ package solitaire.presentation;
 //import solitaire.controle.* ;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -16,7 +20,7 @@ import solitaire.controle.CCarte;
 /**
  * Composant Presentation d'une carte
  */
-public class PCarte extends JPanel {
+public class PCarte extends JPanel implements Transferable{
 
 	protected CCarte controle ; // controleur associe
 	protected JLabel face, dos;
@@ -84,5 +88,24 @@ public class PCarte extends JPanel {
 		hauteur = iconeDos.getIconHeight() +2;
 	}
 
+	public CCarte getControle() {
+		return controle;
+	}
+
+	public Object getTransferData(DataFlavor arg0)
+			throws UnsupportedFlavorException, IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public DataFlavor[] getTransferDataFlavors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isDataFlavorSupported(DataFlavor arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 } // PCarte

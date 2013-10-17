@@ -8,6 +8,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 
 	private PTasDeCartesColorees p;
 	
+	
 	public CTasDeCartesColorees(String nom, int c, CUsine u) {
 		super(nom, c, u);
 		p = new PTasDeCartesColorees(this);
@@ -28,5 +29,27 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 	
 	public PTasDeCartesColorees getPresentation() {
 		return p;
+	}
+
+	public void p2c_dragEnter(CCarte cc) {
+		if (isEmpilable(cc)){
+			p.c2p_showEmpilable();
+		} else {
+			p.c2p_showNonEmpilable();
+		}
+	}
+
+	public void p2c_dragExit(CCarte cc) {
+		p.c2p_showNeutre();
+	}
+
+	public void p2c_drop(CCarte cc) {
+		if (isEmpilable(cc)){
+			empiler(cc);
+			p.c2p_dropOK();
+		} else {
+			p.c2p_dropKO();
+		}
+		p.c2p_showNeutre();
 	}
 }
