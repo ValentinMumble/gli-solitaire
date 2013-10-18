@@ -34,4 +34,6 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 	public PTasDeCartesAlternees getPresentation() {
 		return p;
 	}
+
+	
 }

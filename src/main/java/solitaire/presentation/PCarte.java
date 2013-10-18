@@ -20,9 +20,9 @@ import solitaire.controle.CCarte;
 /**
  * Composant Presentation d'une carte
  */
-public class PCarte extends JPanel implements Transferable{
+public class PCarte extends JPanel implements Transferable {
 
-	protected CCarte controle ; // controleur associe
+	protected CCarte controle; // controleur associe
 	protected JLabel face, dos;
 	protected ImageIcon icone; // image de la face
 	protected static ImageIcon iconeDos; // image du dos
@@ -34,8 +34,8 @@ public class PCarte extends JPanel implements Transferable{
 	 * @param chaine
 	 *            : nom de la carte (exemple "3H" = 3 Heart)
 	 */
-	public PCarte (final String chaine, final CCarte controle) {
-		this.controle = controle ;
+	public PCarte(final String chaine, final CCarte controle) {
+		this.controle = controle;
 
 		// image de la face
 		icone = new ImageIcon(ClassLoader.getSystemResource("cartesCSHD/"
@@ -84,28 +84,41 @@ public class PCarte extends JPanel implements Transferable{
 	static {
 		iconeDos = new ImageIcon(
 				ClassLoader.getSystemResource("cartesCSHD/dos.jpg"));
-		largeur = iconeDos.getIconWidth() +2;
-		hauteur = iconeDos.getIconHeight() +2;
+		largeur = iconeDos.getIconWidth() + 2;
+		hauteur = iconeDos.getIconHeight() + 2;
 	}
 
 	public CCarte getControle() {
 		return controle;
 	}
 
-	public Object getTransferData(DataFlavor arg0)
+	public Object getTransferData(DataFlavor flavor)
 			throws UnsupportedFlavorException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		Object result = null ;
+		if (flavor.isMimeTypeEqual (
+				DataFlavor.javaJVMLocalObjectMimeType)) {
+			result = this ;
+		} else {
+			result = null ;
+		}
+		return (result) ;
 	}
 
-	public DataFlavor[] getTransferDataFlavors() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public DataFlavor[] getTransferDataFlavors() {
+	DataFlavor data [] = new DataFlavor [1] ;
+	try {
+		data [0] = new DataFlavor
+				(DataFlavor.javaJVMLocalObjectMimeType) ;
+	} catch (java.lang.ClassNotFoundException e) { }
+	return (data) ;
+}
 
-	public boolean isDataFlavorSupported(DataFlavor arg0) {
-		// TODO Auto-generated method stub
-		return false;
+public boolean isDataFlavorSupported(DataFlavor flavor) {
+	if ((flavor.isMimeTypeEqual (DataFlavor.javaJVMLocalObjectMimeType))) {
+		return (true) ;
+	} else {
+		return (false) ;
 	}
-	
+}
+
 } // PCarte

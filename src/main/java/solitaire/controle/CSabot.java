@@ -1,10 +1,7 @@
 package solitaire.controle;
 
-import javax.print.attribute.standard.PresentationDirection;
-
 import solitaire.application.Sabot;
 import solitaire.application.Tas;
-import solitaire.presentation.PCarte;
 import solitaire.presentation.PSabot;
 
 public class CSabot extends Sabot {

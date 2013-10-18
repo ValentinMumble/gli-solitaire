@@ -13,7 +13,7 @@ public class PTasDeCartes extends JPanel {
 	private int x;
 	private int y;
 	
-	private ICTasDeCartes controle;
+	protected ICTasDeCartes controle;
 	
 	public PTasDeCartes(ICTasDeCartes c) {
 		setLayout(null);

@@ -1,5 +1,6 @@
 package solitaire.presentation;
 
+import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
@@ -12,6 +13,7 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import solitaire.controle.CCarte;
@@ -30,6 +32,7 @@ public class PSabot extends JPanel {
 	private MyDragSourceListener dsl;
 	protected DragGestureEvent theInitialEvent;
 	protected DragSource ds = null;
+	private PCarte selected;
 
 	public PSabot(CSabot cSabot, PTasDeCartes c, PTasDeCartes v) {
 		controle = cSabot;
@@ -37,12 +40,17 @@ public class PSabot extends JPanel {
 		visibles = v;
 		add(cachees);
 		add(visibles);
+		cachees.setBorder(BorderFactory.createLineBorder(Color.black));
 		cachees.setDxDy(0, 0);
-		visibles.setDxDy(-15, 0);
+		visibles.setDxDy(15, 0);
 		rtl = new RetournerTasListener();
 		rcl = new RetournerCarteListener();
-		//TODO
-		//visibles.addMouseMotionListener(((dgl = new MyDragGestureListener()));
+		ds = new DragSource () ;
+		ds.createDefaultDragGestureRecognizer (
+				visibles, DnDConstants.ACTION_MOVE,
+				new MyDragGestureListener ()) ;
+		ds.addDragSourceListener (
+				new MyDragSourceListener ()) ;
 	}
 
 	public void activerRetournerCarte() {
@@ -62,84 +70,92 @@ public class PSabot extends JPanel {
 	}
 
 	protected class MyDragGestureListener implements DragGestureListener {
-		public void dragGestureRecognized (DragGestureEvent dge) {
+		public void dragGestureRecognized(DragGestureEvent dge) {
 			theInitialEvent = dge;
-			PCarte pc = null;
+			selected = null;
 			CCarte cc = null;
 			try {
-				pc = (PCarte)visibles.getComponentAt(dge.getDragOrigin());
-				cc = pc.getControle();
-			} catch (Exception e) { }
+				selected = (PCarte) visibles.getComponentAt(dge.getDragOrigin());
+				cc = selected.getControle();
+			} catch (Exception e) {
+			}
 			controle.p2c_debutDnd(cc);
 		}
 	}
 
 	protected class MyDragSourceListener implements DragSourceListener {
-		public void dragDropEnd (DragSourceDropEvent event) {
-			//TODO
-			PCarte pc = (PCarte)event.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
-			controle.p2c_dragDropEnd(event.getDropSuccess(), pc.getControle());
+		public void dragDropEnd(DragSourceDropEvent event) {
+			controle.p2c_dragDropEnd(event.getDropSuccess(), selected.getControle());
 		}
-		public void dragEnter (DragSourceDragEvent event) { }
-		public void dragExit (DragSourceEvent event) { }
-		public void dragOver (DragSourceDragEvent event) { }
-		public void dropActionChanged (DragSourceDragEvent event) { }
+
+		public void dragEnter(DragSourceDragEvent event) {
+		}
+
+		public void dragExit(DragSourceEvent event) {
+		}
+
+		public void dragOver(DragSourceDragEvent event) {
+		}
+
+		public void dropActionChanged(DragSourceDragEvent event) {
+		}
 	}
 
-private class RetournerTasListener implements MouseListener {
+	private class RetournerTasListener implements MouseListener {
 
-	public void mouseClicked(MouseEvent e) {
-		controle.retourner();
-	}
+		public void mouseClicked(MouseEvent e) {
+			controle.retourner();
+		}
 
-	public void mouseEntered(MouseEvent e) {
+		public void mouseEntered(MouseEvent e) {
 
-	}
+		}
 
-	public void mouseExited(MouseEvent e) {
+		public void mouseExited(MouseEvent e) {
 
-	}
+		}
 
-	public void mousePressed(MouseEvent e) {
+		public void mousePressed(MouseEvent e) {
 
-	}
+		}
 
-	public void mouseReleased(MouseEvent e) {
+		public void mouseReleased(MouseEvent e) {
 
-	}
-
-}
-
-private class RetournerCarteListener implements MouseListener {
-
-	public void mouseClicked(MouseEvent e) {
-		controle.retournerCarte();
-	}
-
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	public void mouseExited(MouseEvent e) {
+		}
 
 	}
 
-	public void mousePressed(MouseEvent e) {
+	private class RetournerCarteListener implements MouseListener {
+
+		public void mouseClicked(MouseEvent e) {
+			controle.retournerCarte();
+		}
+
+		public void mouseEntered(MouseEvent e) {
+
+		}
+
+		public void mouseExited(MouseEvent e) {
+
+		}
+
+		public void mousePressed(MouseEvent e) {
+
+		}
+
+		public void mouseReleased(MouseEvent e) {
+
+		}
 
 	}
 
-	public void mouseReleased(MouseEvent e) {
-
+	public void c2p_debutDnDOK(CCarte cc) {
+		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop,
+				cc.getPresentation(), dsl);
 	}
 
-}
+	public void c2p_debutDnDKO(CCarte cc) {
 
-public void c2p_debutDnDOK(CCarte cc) {
-	ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, cc.getPresentation(), dsl);
-}
-
-public void c2p_debutDnDKO(CCarte cc) {
-
-}
+	}
 
 }
