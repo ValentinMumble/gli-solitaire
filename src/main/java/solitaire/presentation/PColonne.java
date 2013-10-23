@@ -11,6 +11,7 @@ import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DragSourceMotionListener;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
@@ -25,24 +26,27 @@ import javax.swing.JPanel;
 
 import solitaire.controle.CCarte;
 import solitaire.controle.CColonne;
+import solitaire.controle.CTasDeCartes;
 
 public class PColonne extends JPanel {
-	
+
+	public static final int DY = 15;
+
 	private CColonne controle;
-	
+
 	private PTasDeCartes cachees;
-	private PTasDeCartes visibles;	
+	private PTasDeCartes visibles;
 	private RetournerCarteListener rcl;
 	private DropTargetDropEvent theFinalEvent;
-	protected DropTarget dropTarget = null ;
+	protected DropTarget dropTarget = null;
 	private MyDragGestureListener dgl;
 	private MyDragSourceListener dsl;
 	protected DragGestureEvent theInitialEvent;
 	protected DragSource ds = null;
-	private PCarte selected;
+	private PTasDeCartes selected;
+	protected MyDragSourceMotionListener myDragSourceMotionListener = null;
 
-	public PColonne(CColonne cColonne, PTasDeCartes c,
-			PTasDeCartesAlternees v) {
+	public PColonne(CColonne cColonne, PTasDeCartes c, PTasDeCartesAlternees v) {
 		controle = cColonne;
 		cachees = c;
 		visibles = v;
@@ -52,36 +56,41 @@ public class PColonne extends JPanel {
 		setPreferredSize(getSize());
 		add(cachees);
 		add(visibles, 0);
-		cachees.setDxDy(0, 15);
-		visibles.setDxDy(0, 15);
+		cachees.setDxDy(0, DY);
+		visibles.setDxDy(0, DY);
 		visibles.setBorder(BorderFactory.createLineBorder(Color.black));
-		dropTarget = new DropTarget(visibles, new MyDropTargetListener()) ;
-		ds = new DragSource () ;
-		ds.createDefaultDragGestureRecognizer (
-				visibles, DnDConstants.ACTION_MOVE,
-				new MyDragGestureListener ()) ;
-		ds.addDragSourceListener (
-				new MyDragSourceListener ()) ;
+		dropTarget = new DropTarget(visibles, new MyDropTargetListener());
+		ds = new DragSource();
+		ds.addDragSourceListener(new MyDragSourceListener());
+		ds.createDefaultDragGestureRecognizer(visibles,
+				DnDConstants.ACTION_MOVE, new MyDragGestureListener());
+		myDragSourceMotionListener = new MyDragSourceMotionListener();
+		ds.addDragSourceMotionListener(myDragSourceMotionListener);
+	}
+
+	class MyDragSourceMotionListener implements DragSourceMotionListener {
+		public void dragMouseMoved(DragSourceDragEvent event) {
+			selected.setLocation(1 + event.getX(), 1 + event.getY());
+		}
 	}
 
 	protected class MyDropTargetListener implements DropTargetListener {
-		PCarte pc;
+		PTasDeCartes pc;
+
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
-				pc = (PCarte)event.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
-			} catch (UnsupportedFlavorException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			controle.p2c_dragEnter(pc.getControle());
+				pc = (PTasDeCartes) event.getTransferable().getTransferData(
+						new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+				controle.p2c_dragEnter(pc.getControle());
+			} catch (Exception e) {}
 		}
 
 		public void dragExit(DropTargetEvent event) {
-			controle.p2c_dragExit(pc.getControle());
+			if (pc != null){
+				controle.p2c_dragExit(pc.getControle());
+			}
 		}
+
 		public void dragOver(DropTargetDragEvent event) {
 
 		}
@@ -97,15 +106,16 @@ public class PColonne extends JPanel {
 		}
 
 	}
-	
+
 	protected class MyDragGestureListener implements DragGestureListener {
 		public void dragGestureRecognized(DragGestureEvent dge) {
 			theInitialEvent = dge;
 			selected = null;
-			CCarte cc = null;
+			CTasDeCartes cc = null;
 			try {
-				selected = (PCarte) visibles.getComponentAt(dge.getDragOrigin());
-				cc = selected.getControle();
+				selected = (PTasDeCartes) visibles
+						.getComponentAt(dge.getDragOrigin());
+				cc = (CTasDeCartes) selected.getControle();
 			} catch (Exception e) {
 			}
 			controle.p2c_debutDnd(cc);
@@ -114,7 +124,8 @@ public class PColonne extends JPanel {
 
 	protected class MyDragSourceListener implements DragSourceListener {
 		public void dragDropEnd(DragSourceDropEvent event) {
-			controle.p2c_dragDropEnd(event.getDropSuccess(), selected.getControle());
+			controle.p2c_dragDropEnd(event.getDropSuccess(),
+					selected.getControle());
 		}
 
 		public void dragEnter(DragSourceDragEvent event) {
@@ -130,20 +141,16 @@ public class PColonne extends JPanel {
 		}
 	}
 
-
 	public void c2p_showEmpilable() {
-		//TODO
-		
+
 	}
 
 	public void c2p_showNonEmpilable() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void c2p_showNeutre() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void c2p_dropKO() {
@@ -155,20 +162,20 @@ public class PColonne extends JPanel {
 		theFinalEvent.getDropTargetContext().dropComplete(true);
 	}
 
-
-	public void c2p_debutDnDOK(CCarte cc) {
+	public void c2p_debutDnDOK(CTasDeCartes toMove) {
 		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop,
-				cc.getPresentation(), dsl);
+				toMove.getPresentation(), dsl);
 	}
 
 	public void c2p_debutDnDKO(CCarte cc) {
 
 	}
-	
-	public void setCorrectSize() {
-		visibles.setLocation(0, cachees.getHeight()-80);
+
+	public void setCorrectLocation() {
+		visibles.setLocation(0, cachees.getHeight() - (99 + DY));
 	}
 	
+
 	public void activerRetournerCarte() {
 		cachees.addMouseListener(rcl);
 	}
@@ -176,35 +183,36 @@ public class PColonne extends JPanel {
 	public void desactiverRetournerCarte() {
 		cachees.removeMouseListener(rcl);
 	}
-	
+
 	private class RetournerCarteListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent e) {
-			System.out.println("retourner carte");
 			try {
 				controle.retournerCarte();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			
+
 		}
 
 		public void mouseExited(MouseEvent e) {
-			
+
 		}
 
 		public void mousePressed(MouseEvent e) {
-			
+
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			
+
 		}
-		
+
+	}
+
+	public void setCorrectSize(int i, int j) {
+		visibles.setSize(i, j);
 	}
 
 }

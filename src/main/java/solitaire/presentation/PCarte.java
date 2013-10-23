@@ -86,6 +86,7 @@ public class PCarte extends JPanel implements Transferable {
 				ClassLoader.getSystemResource("cartesCSHD/dos.jpg"));
 		largeur = iconeDos.getIconWidth() + 2;
 		hauteur = iconeDos.getIconHeight() + 2;
+		System.out.println(hauteur);
 	}
 
 	public CCarte getControle() {
@@ -94,31 +95,30 @@ public class PCarte extends JPanel implements Transferable {
 
 	public Object getTransferData(DataFlavor flavor)
 			throws UnsupportedFlavorException, IOException {
-		Object result = null ;
-		if (flavor.isMimeTypeEqual (
-				DataFlavor.javaJVMLocalObjectMimeType)) {
-			result = this ;
+		Object result = null;
+		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
+			result = this;
 		} else {
-			result = null ;
+			result = null;
 		}
-		return (result) ;
+		return result;
 	}
 
-public DataFlavor[] getTransferDataFlavors() {
-	DataFlavor data [] = new DataFlavor [1] ;
-	try {
-		data [0] = new DataFlavor
-				(DataFlavor.javaJVMLocalObjectMimeType) ;
-	} catch (java.lang.ClassNotFoundException e) { }
-	return (data) ;
-}
-
-public boolean isDataFlavorSupported(DataFlavor flavor) {
-	if ((flavor.isMimeTypeEqual (DataFlavor.javaJVMLocalObjectMimeType))) {
-		return (true) ;
-	} else {
-		return (false) ;
+	public DataFlavor[] getTransferDataFlavors() {
+		DataFlavor data[] = new DataFlavor[1];
+		try {
+			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+		} catch (java.lang.ClassNotFoundException e) {
+		}
+		return (data);
 	}
-}
+
+	public boolean isDataFlavorSupported(DataFlavor flavor) {
+		if ((flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType))) {
+			return (true);
+		} else {
+			return (false);
+		}
+	}
 
 } // PCarte

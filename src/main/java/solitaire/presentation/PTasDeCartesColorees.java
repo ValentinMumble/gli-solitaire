@@ -34,11 +34,8 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 			try {
 				pc = (PCarte)event.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
 			} catch (UnsupportedFlavorException e) {
-				e.printStackTrace();
 			} catch (IOException e) {
-				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
 			}
 			((CTasDeCartesColorees)controle).p2c_dragEnter(pc.getControle());
 		}
