@@ -22,6 +22,7 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import solitaire.controle.CCarte;
 import solitaire.controle.CColonne;
 import solitaire.controle.CTasDeCartes;
 import solitaire.controle.CTasDeCartesAlternees;
@@ -108,7 +109,7 @@ public class PColonne extends JPanel {
 
 	class MyDragSourceMotionListener implements DragSourceMotionListener {
 		public void dragMouseMoved(DragSourceDragEvent event) {
-			//TODO selected.setLocation(1 + event.getX(), 1 + event.getY());
+			selectedCard.setLocation(1 + event.getX(), 1 + event.getY());
 		}
 	}
 
@@ -163,19 +164,19 @@ public class PColonne extends JPanel {
 	}
 
 	protected class MyDropTargetListener implements DropTargetListener {
-		PTasDeCartes pc;
-
+		//PTasDeCartes pc;
+		PCarte pc;
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
-				pc = (PTasDeCartes) event.getTransferable().getTransferData(
+				pc = (PCarte) event.getTransferable().getTransferData(
 						new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
-				controle.p2c_dragEnter((CTasDeCartesAlternees)pc.getControle());
+				controle.p2c_dragEnter((CCarte)pc.getControle());
 			} catch (Exception e) {}
 		}
 
 		public void dragExit(DropTargetEvent event) {
 			if (pc != null){
-				controle.p2c_dragExit((CTasDeCartesAlternees)pc.getControle());
+				controle.p2c_dragExit();
 			}
 		}
 
@@ -185,7 +186,7 @@ public class PColonne extends JPanel {
 
 		public void drop(DropTargetDropEvent event) {
 			theFinalEvent = event;
-			controle.p2c_drop((CTasDeCartes)pc.getControle());
+			controle.p2c_drop((CCarte)pc.getControle());
 
 		}
 

@@ -69,17 +69,29 @@ public class PTasDeCartes extends JPanel implements Transferable{
 
 	public Object getTransferData(DataFlavor flavor)
 			throws UnsupportedFlavorException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		Object result = null;
+		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
+			result = this;
+		} else {
+			result = null;
+		}
+		return result;
 	}
 
 	public DataFlavor[] getTransferDataFlavors() {
-		// TODO Auto-generated method stub
-		return null;
+		DataFlavor data[] = new DataFlavor[1];
+		try {
+			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+		} catch (java.lang.ClassNotFoundException e) {
+		}
+		return (data);
 	}
 
 	public boolean isDataFlavorSupported(DataFlavor flavor) {
-		// TODO Auto-generated method stub
-		return false;
+		if ((flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType))) {
+			return (true);
+		} else {
+			return (false);
+		}
 	}
 }

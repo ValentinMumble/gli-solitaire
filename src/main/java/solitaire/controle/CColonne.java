@@ -11,6 +11,7 @@ public class CColonne extends Colonne {
 
 	private PColonne p;
 	private Stack<PCarte> selectedCards;
+	private Stack<PCarte> selectedCards_old;
 
 	public CColonne(String nom, CUsine u) {
 		super(nom, u);
@@ -46,9 +47,11 @@ public class CColonne extends Colonne {
 		return p;
 	}
 
-	public void p2c_dragEnter(CTasDeCartesAlternees top) {
+	public void p2c_dragEnter (CCarte top) {
+	//(CTasDeCartesAlternees top) {
 		try {
-			if (isEmpilable(top.getBase())){
+			//if (isEmpilable(top.getBase())){
+			if (isEmpilable(top)){
 				p.c2p_showEmpilable();
 			} else {
 				p.c2p_showNonEmpilable();
@@ -57,13 +60,13 @@ public class CColonne extends Colonne {
 		}
 	}
 
-	public void p2c_dragExit(CTasDeCartesAlternees top) {
+	public void p2c_dragExit() {
 		p.c2p_showNeutre();
 	}
 
-	public void p2c_drop(CTasDeCartes top) {
+	public void p2c_drop(CCarte top) {
 		try {
-			if (isEmpilable(top.getBase())){
+			if (isEmpilable(top)){
 				empiler(top);
 				p.c2p_dropOK();
 			} else {
@@ -93,7 +96,7 @@ public class CColonne extends Colonne {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		selectedCards_old = selectedCards;
 		if (selectedCards.size() == 1){
 			p.c2p_debutDnDOK(selectedCard);
 		}
@@ -111,7 +114,10 @@ public class CColonne extends Colonne {
 
 	public void p2c_dragDropEnd(boolean dropSuccess, CCarte cc) {
 		if (! dropSuccess){
-			empiler(cc);
+			while(!selectedCards_old.empty()){
+				empiler(selectedCards_old.pop().getControle());
+			}
 		}
+		selectedCards_old.clear();
 	}
 }
