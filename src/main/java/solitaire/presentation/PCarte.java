@@ -2,19 +2,15 @@ package solitaire.presentation;
 
 //import solitaire.controle.* ;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
-import solitaire.application.Carte;
 import solitaire.controle.CCarte;
 
 /**
@@ -22,6 +18,10 @@ import solitaire.controle.CCarte;
  */
 public class PCarte extends JPanel implements Transferable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected CCarte controle; // controleur associe
 	protected JLabel face, dos;
 	protected ImageIcon icone; // image de la face
@@ -86,7 +86,6 @@ public class PCarte extends JPanel implements Transferable {
 				ClassLoader.getSystemResource("cartesCSHD/dos.jpg"));
 		largeur = iconeDos.getIconWidth() + 2;
 		hauteur = iconeDos.getIconHeight() + 2;
-		System.out.println(hauteur);
 	}
 
 	public CCarte getControle() {

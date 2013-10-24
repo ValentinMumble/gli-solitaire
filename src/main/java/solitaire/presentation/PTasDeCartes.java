@@ -1,6 +1,5 @@
 package solitaire.presentation;
 
-import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -8,11 +7,14 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import solitaire.controle.CCarte;
 import solitaire.controle.ICTasDeCartes;
 
 public class PTasDeCartes extends JPanel implements Transferable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int dx;
 	private int dy;
 	private int x;

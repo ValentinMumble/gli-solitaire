@@ -1,7 +1,6 @@
 package solitaire.presentation;
 
 import java.awt.Color;
-import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -21,6 +20,11 @@ import solitaire.controle.CSabot;
 
 public class PSabot extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private CSabot controle;
 
 	private PTasDeCartes cachees;
@@ -28,7 +32,6 @@ public class PSabot extends JPanel {
 
 	private RetournerTasListener rtl;
 	private RetournerCarteListener rcl;
-	private MyDragGestureListener dgl;
 	private MyDragSourceListener dsl;
 	protected DragGestureEvent theInitialEvent;
 	protected DragSource ds = null;

@@ -18,6 +18,10 @@ import solitaire.controle.ICTasDeCartes;
 
 public class PTasDeCartesColorees extends PTasDeCartes {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DropTargetDropEvent theFinalEvent;
 	protected DropTarget dropTarget = null ;
 

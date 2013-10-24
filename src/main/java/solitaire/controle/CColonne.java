@@ -1,13 +1,16 @@
 package solitaire.controle;
 
+import java.util.Stack;
+
 import solitaire.application.Colonne;
 import solitaire.application.Tas;
+import solitaire.presentation.PCarte;
 import solitaire.presentation.PColonne;
-import solitaire.presentation.PTasDeCartesAlternees;
 
 public class CColonne extends Colonne {
 
 	private PColonne p;
+	private Stack<PCarte> selectedCards;
 
 	public CColonne(String nom, CUsine u) {
 		super(nom, u);
@@ -43,9 +46,9 @@ public class CColonne extends Colonne {
 		return p;
 	}
 
-	public void p2c_dragEnter(ICTasDeCartes top) {
+	public void p2c_dragEnter(CTasDeCartesAlternees top) {
 		try {
-			if (isEmpilable(((CTasDeCartesAlternees)top).getBase())){
+			if (isEmpilable(top.getBase())){
 				p.c2p_showEmpilable();
 			} else {
 				p.c2p_showNonEmpilable();
@@ -54,14 +57,14 @@ public class CColonne extends Colonne {
 		}
 	}
 
-	public void p2c_dragExit(ICTasDeCartes top) {
+	public void p2c_dragExit(CTasDeCartesAlternees top) {
 		p.c2p_showNeutre();
 	}
 
-	public void p2c_drop(ICTasDeCartes top) {
+	public void p2c_drop(CTasDeCartes top) {
 		try {
-			if (isEmpilable(((CTasDeCartesAlternees)top).getBase())){
-				empiler((CTasDeCartes)top);
+			if (isEmpilable(top.getBase())){
+				empiler(top);
 				p.c2p_dropOK();
 			} else {
 				p.c2p_dropKO();
@@ -71,27 +74,39 @@ public class CColonne extends Colonne {
 		p.c2p_showNeutre();
 	}
 
-	public void p2c_debutDnd(CTasDeCartes ct) {
+	public void p2c_debutDnd(PCarte selectedCard) {
 		try {
-			int i;
-			CTasDeCartes toMove;
-			for (i =0; i < visibles.getNombre(); i++){
-				if (ct.getBase() == visibles.getCarte(i)){
-					break;
-				}
-			}
-			if (i == visibles.getNombre()){
-				p.c2p_debutDnDKO(toMove);
-			}
-			else {
-				for (int j = visibles.getNombre()-1; j >= i; j--){
-					visibles.depiler();
-					p.c2p_debutDnDOK(toMove);
-					}
-			}
+			CCarte curCCarte;
+			PCarte curPCarte = null;
+			selectedCards = new Stack<PCarte>();
+			curCCarte = (CCarte)(visibles.getSommet());
+			curPCarte = curCCarte.getPresentation();
+			selectedCards.push(curPCarte);
+			depiler();
+			while(curPCarte!=selectedCard && curPCarte!=null)
+			{
+				curCCarte = (CCarte)(visibles.getSommet());
+				curPCarte = curCCarte.getPresentation();
+				selectedCards.push(curPCarte);
+				depiler();
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		catch (Exception e) {}
+		if (selectedCards.size() == 1){
+			p.c2p_debutDnDOK(selectedCard);
+		}
+		else if (selectedCards.size()>1){
+			CTasDeCartes ctDragged = new CTasDeCartes("tas", new CUsine());
+			while(!selectedCards.isEmpty()){
+				ctDragged.empiler(selectedCards.pop().getControle());
+			}
+			p.c2p_debutDnDOK(ctDragged.getPresentation());
+		}
+		else {
+			p.c2p_debutDnDOK(selectedCard);
+		}
 	}
 
 	public void p2c_dragDropEnd(boolean dropSuccess, CCarte cc) {
