@@ -43,9 +43,9 @@ public class PTasDeCartes extends JPanel implements Transferable{
 		repaint();
 	}
 
-	public void empiler(PCarte pc) {
-		add(pc, 0);
-		pc.setLocation(x, y);
+	public void empiler(PCarte pCarte) {
+		add(pCarte, 0);
+		pCarte.setLocation(x, y);
 		if (getWidth() == 0 && getHeight()==0){
 			setSize(72, 96);
 		}

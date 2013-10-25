@@ -20,10 +20,11 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 		p.depiler(((CCarte) s).getPresentation());
 	}
 	
-	public void empiler(Carte c) {
-		if (isEmpilable(c)) {
-			super.empiler(c);
-			p.empiler(((CCarte) c).getPresentation());
+	public void empiler(CCarte cc) {
+		System.out.println(isEmpilable(cc));
+		if (isEmpilable(cc)) {
+			super.empiler(cc);
+			p.empiler(((CCarte) cc).getPresentation());
 		}
 	}
 	
@@ -31,25 +32,37 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 		return p;
 	}
 
-	public void p2c_dragEnter(CCarte cc) {
-		if (isEmpilable(cc)){
-			p.c2p_showEmpilable();
-		} else {
-			p.c2p_showNonEmpilable();
+	public void p2c_dragEnter(CTasDeCartes ct) {
+		Carte c;
+		try {
+			c = ct.getSommet();
+			if (isEmpilable(c) && ct.getNombre() == 1){
+				p.c2p_showEmpilable();
+			} else {
+				p.c2p_showNonEmpilable();
+			}
+		} catch (Exception e) {
 		}
+		
 	}
 
-	public void p2c_dragExit(CCarte cc) {
+	public void p2c_dragExit(CTasDeCartes ct) {
 		p.c2p_showNeutre();
 	}
 
-	public void p2c_drop(CCarte cc) {
-		if (isEmpilable(cc)){
-			empiler(cc);
-			p.c2p_dropOK();
-		} else {
-			p.c2p_dropKO();
+	public void p2c_drop(CTasDeCartes ct) {
+		Carte c;
+		try {
+			c = ct.getSommet();
+			if (isEmpilable(c) && ct.getNombre() == 1){
+				empiler(c);
+				p.c2p_dropOK();
+			} else {
+				p.c2p_dropKO();
+			}
+			p.c2p_showNeutre();
+		} catch (Exception e) {
 		}
-		p.c2p_showNeutre();
 	}
+		
 }

@@ -1,8 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
@@ -50,7 +52,11 @@ public class SolitaireGLI extends Solitaire {
 		sabot.add(((CSabot) solitaire.sabot).getPresentation());
 
 		for (TasDeCartesColorees t : solitaire.pilesColorees) {
-			couleurs.add(((CTasDeCartesColorees) t).getPresentation());
+			JPanel uneCouleur = new JPanel();
+			uneCouleur.setLayout(new GridLayout(2, 1));
+			uneCouleur.add(((CTasDeCartesColorees) t).getPresentation());
+			uneCouleur.add(new JLabel(((CTasDeCartesColorees) t).getNom()));
+			couleurs.add(uneCouleur);
 		}
 
 		for (Colonne c : solitaire.pilesAlternees) {
@@ -65,6 +71,7 @@ public class SolitaireGLI extends Solitaire {
 		f.pack(); // dimensionner le cadre
 		f.setLocation(200, 100); // le positionner
 		f.setVisible(true); // et le rendre visible
+		solitaire.jouer();
 	} // main
 
 }

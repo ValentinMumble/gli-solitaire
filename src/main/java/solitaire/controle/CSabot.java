@@ -7,6 +7,7 @@ import solitaire.presentation.PSabot;
 public class CSabot extends Sabot {
 	
 	private PSabot p;
+	private CTasDeCartes selectedCards;
 
 	public CSabot(String nom, CUsine u) {
 		super(nom, u);
@@ -64,20 +65,22 @@ public class CSabot extends Sabot {
 
 	public void p2c_debutDnd(CCarte cc) {
 		try {
+			selectedCards = new CTasDeCartes("tas", new CUsine());
+			selectedCards.empiler(cc);
 			if (cc == getSommet()){
 				depiler();
-				p.c2p_debutDnDOK(cc);
+				p.c2p_debutDnDOK(selectedCards);
 			} else {
-				p.c2p_debutDnDKO(cc);
+				p.c2p_debutDnDKO(selectedCards);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void p2c_dragDropEnd(boolean dropSuccess, CCarte cc) {
+	public void p2c_dragDropEnd(boolean dropSuccess) {
 		if (! dropSuccess){
-			empiler(cc);
+			empiler(selectedCards);
 		}
 	}
 	

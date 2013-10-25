@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import javax.swing.BorderFactory;
 
+import solitaire.controle.CTasDeCartes;
 import solitaire.controle.CTasDeCartesColorees;
 import solitaire.controle.ICTasDeCartes;
 
@@ -33,49 +34,39 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	}
 
 	protected class MyDropTargetListener implements DropTargetListener {
-		PCarte pc;
+		PTasDeCartes pc;
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
-				pc = (PCarte)event.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+				pc = (PTasDeCartes)event.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
 			} catch (UnsupportedFlavorException e) {
 			} catch (IOException e) {
 			} catch (ClassNotFoundException e) {
 			}
-			((CTasDeCartesColorees)controle).p2c_dragEnter(pc.getControle());
+			((CTasDeCartesColorees)controle).p2c_dragEnter((CTasDeCartes)pc.getControle());
 		}
 
 		public void dragExit(DropTargetEvent event) {
-			((CTasDeCartesColorees)controle).p2c_dragExit(pc.getControle());
+			((CTasDeCartesColorees)controle).p2c_dragExit((CTasDeCartes)pc.getControle());
 		}
 		public void dragOver(DropTargetDragEvent event) {
-
 		}
 
 		public void drop(DropTargetDropEvent event) {
 			theFinalEvent = event;
-			((CTasDeCartesColorees)controle).p2c_drop(pc.getControle());
-
+			((CTasDeCartesColorees)controle).p2c_drop((CTasDeCartes)pc.getControle());
 		}
 
 		public void dropActionChanged(DropTargetDragEvent arg0) {
-
 		}
-
 	}
 
 	public void c2p_showEmpilable() {
-		//TODO
-		
 	}
 
 	public void c2p_showNonEmpilable() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void c2p_showNeutre() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void c2p_dropKO() {

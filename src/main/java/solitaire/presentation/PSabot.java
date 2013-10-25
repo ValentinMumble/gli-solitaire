@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import solitaire.controle.CCarte;
 import solitaire.controle.CSabot;
+import solitaire.controle.CTasDeCartes;
 
 public class PSabot extends JPanel {
 
@@ -88,7 +89,7 @@ public class PSabot extends JPanel {
 
 	protected class MyDragSourceListener implements DragSourceListener {
 		public void dragDropEnd(DragSourceDropEvent event) {
-			controle.p2c_dragDropEnd(event.getDropSuccess(), selected.getControle());
+			controle.p2c_dragDropEnd(event.getDropSuccess());
 		}
 
 		public void dragEnter(DragSourceDragEvent event) {
@@ -152,12 +153,12 @@ public class PSabot extends JPanel {
 
 	}
 
-	public void c2p_debutDnDOK(CCarte cc) {
+	public void c2p_debutDnDOK(CTasDeCartes ct) {
 		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop,
-				cc.getPresentation(), dsl);
+				ct.getPresentation(), dsl);
 	}
 
-	public void c2p_debutDnDKO(CCarte cc) {
+	public void c2p_debutDnDKO(CTasDeCartes ct) {
 
 	}
 

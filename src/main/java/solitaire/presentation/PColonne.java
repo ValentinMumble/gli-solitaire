@@ -22,10 +22,8 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import solitaire.controle.CCarte;
 import solitaire.controle.CColonne;
 import solitaire.controle.CTasDeCartes;
-import solitaire.controle.CTasDeCartesAlternees;
 
 public class PColonne extends JPanel {
 
@@ -126,13 +124,8 @@ public class PColonne extends JPanel {
 				e.printStackTrace();
 			}
 
-			controle.p2c_debutDnd(selectedCard);
+			controle.p2c_debutDnd(selectedCard.getControle());
 		}
-	}
-
-	public void c2p_debutDnDOK(PCarte pc) {
-		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop,
-				pc, dsl);
 	}
 
 	public void c2p_debutDnDOK(PTasDeCartes pt) {
@@ -146,8 +139,7 @@ public class PColonne extends JPanel {
 
 	protected class MyDragSourceListener implements DragSourceListener {
 		public void dragDropEnd(DragSourceDropEvent event) {
-			controle.p2c_dragDropEnd(event.getDropSuccess(),
-					selectedCard.getControle());
+			controle.p2c_dragDropEnd(event.getDropSuccess());
 		}
 
 		public void dragEnter(DragSourceDragEvent event) {
@@ -164,19 +156,18 @@ public class PColonne extends JPanel {
 	}
 
 	protected class MyDropTargetListener implements DropTargetListener {
-		//PTasDeCartes pc;
-		PCarte pc;
+		PTasDeCartes pc;
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
-				pc = (PCarte) event.getTransferable().getTransferData(
+				pc = (PTasDeCartes) event.getTransferable().getTransferData(
 						new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
-				controle.p2c_dragEnter((CCarte)pc.getControle());
+				controle.p2c_dragEnter((CTasDeCartes)pc.getControle());
 			} catch (Exception e) {}
 		}
 
 		public void dragExit(DropTargetEvent event) {
 			if (pc != null){
-				controle.p2c_dragExit();
+				controle.p2c_dragEnter((CTasDeCartes)pc.getControle());
 			}
 		}
 
@@ -186,7 +177,7 @@ public class PColonne extends JPanel {
 
 		public void drop(DropTargetDropEvent event) {
 			theFinalEvent = event;
-			controle.p2c_drop((CCarte)pc.getControle());
+			controle.p2c_drop((CTasDeCartes)pc.getControle());
 
 		}
 
