@@ -2,14 +2,12 @@ package solitaire.presentation;
 
 import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
-import java.io.IOException;
 
 import javax.swing.BorderFactory;
 
@@ -25,10 +23,14 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	private static final long serialVersionUID = 1L;
 	private DropTargetDropEvent theFinalEvent;
 	protected DropTarget dropTarget = null ;
+	private CTasDeCartesColorees controle;
 
-	public PTasDeCartesColorees(ICTasDeCartes c) {
+	public PTasDeCartesColorees(CTasDeCartesColorees c) {
 		super(c);
+		controle = c;
+		setLayout(null);
 		setSize(80, 100);
+		setPreferredSize(getSize());
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		dropTarget = new DropTarget(this, new MyDropTargetListener()) ;
 	}
@@ -38,22 +40,21 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
 				pc = (PTasDeCartes)event.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
-			} catch (UnsupportedFlavorException e) {
-			} catch (IOException e) {
-			} catch (ClassNotFoundException e) {
-			}
-			((CTasDeCartesColorees)controle).p2c_dragEnter((CTasDeCartes)pc.getControle());
+				controle.p2c_dragEnter((CTasDeCartes)pc.getControle());
+			} catch (Exception e) {}
 		}
 
 		public void dragExit(DropTargetEvent event) {
-			((CTasDeCartesColorees)controle).p2c_dragExit((CTasDeCartes)pc.getControle());
+			if (pc != null){
+				controle.p2c_dragExit((CTasDeCartes)pc.getControle());
+			}
 		}
 		public void dragOver(DropTargetDragEvent event) {
 		}
 
 		public void drop(DropTargetDropEvent event) {
 			theFinalEvent = event;
-			((CTasDeCartesColorees)controle).p2c_drop((CTasDeCartes)pc.getControle());
+			controle.p2c_drop((CTasDeCartes)pc.getControle());
 		}
 
 		public void dropActionChanged(DropTargetDragEvent arg0) {

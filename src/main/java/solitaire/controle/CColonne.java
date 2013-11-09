@@ -8,6 +8,8 @@ public class CColonne extends Colonne {
 
 	private PColonne p;
 	private CTasDeCartes selectedCards;
+	private CTasDeCartes selectedCardsbis;
+
 
 	public CColonne(String nom, CUsine u) {
 		super(nom, u);
@@ -83,7 +85,13 @@ public class CColonne extends Colonne {
 				curCCarte = (CCarte)(visibles.getSommet());
 				selectedCards.empiler(curCCarte);
 				depiler();
-			} 
+			}
+			/*while(selectedCards!=null)
+			{
+				curCCarte = (CCarte)(selectedCards.getSommet());
+				selectedCardsbis.empiler(curCCarte);
+				selectedCards.depiler();
+			}*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

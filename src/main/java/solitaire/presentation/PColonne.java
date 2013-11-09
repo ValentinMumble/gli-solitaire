@@ -167,7 +167,7 @@ public class PColonne extends JPanel {
 
 		public void dragExit(DropTargetEvent event) {
 			if (pc != null){
-				controle.p2c_dragEnter((CTasDeCartes)pc.getControle());
+				controle.p2c_dragExit((CTasDeCartes)pc.getControle());
 			}
 		}
 

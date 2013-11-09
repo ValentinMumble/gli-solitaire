@@ -14,6 +14,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 		p = new PTasDeCartesColorees(this);
 	}
 	
+	@Override
 	public void depiler() throws Exception {
 		Carte s = getSommet();
 		super.depiler();
@@ -21,7 +22,6 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 	}
 	
 	public void empiler(CCarte cc) {
-		System.out.println(isEmpilable(cc));
 		if (isEmpilable(cc)) {
 			super.empiler(cc);
 			p.empiler(((CCarte) cc).getPresentation());
@@ -55,14 +55,15 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 		try {
 			c = ct.getSommet();
 			if (isEmpilable(c) && ct.getNombre() == 1){
-				empiler(c);
+				empiler((CCarte)c);
 				p.c2p_dropOK();
 			} else {
 				p.c2p_dropKO();
 			}
-			p.c2p_showNeutre();
 		} catch (Exception e) {
 		}
+		p.c2p_showNeutre();
+		
 	}
 		
 }
