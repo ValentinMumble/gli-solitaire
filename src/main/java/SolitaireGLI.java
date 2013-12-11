@@ -1,8 +1,15 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -55,7 +62,11 @@ public class SolitaireGLI extends Solitaire {
 			JPanel uneCouleur = new JPanel();
 			uneCouleur.setLayout(new GridLayout(2, 1));
 			uneCouleur.add(((CTasDeCartesColorees) t).getPresentation());
-			uneCouleur.add(new JLabel(((CTasDeCartesColorees) t).getNom()));
+			String nom = ((CTasDeCartesColorees) t).getNom();
+			System.out.println(nom);
+			//TODO background tas
+			//ImageIcon image = new ImageIcon(ClassLoader.getSystemResource(nom+".png"));
+			uneCouleur.add(new JLabel(nom));
 			couleurs.add(uneCouleur);
 		}
 
@@ -73,5 +84,5 @@ public class SolitaireGLI extends Solitaire {
 		f.setVisible(true); // et le rendre visible
 		solitaire.jouer();
 	} // main
-
+	
 }

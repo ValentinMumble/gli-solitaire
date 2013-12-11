@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import solitaire.controle.CCarte;
 import solitaire.controle.CSabot;
 import solitaire.controle.CTasDeCartes;
-import solitaire.presentation.PColonne.MyDragSourceMotionListener;
 
 public class PSabot extends JPanel {
 
@@ -59,7 +58,7 @@ public class PSabot extends JPanel {
 		ds.addDragSourceListener (
 				new MyDragSourceListener ()) ;
 		myDragSourceMotionListener = new MyDragSourceMotionListener();
-		//ds.addDragSourceMotionListener(myDragSourceMotionListener);
+		ds.addDragSourceMotionListener(myDragSourceMotionListener);
 	}
 
 	public void activerRetournerCarte() {
