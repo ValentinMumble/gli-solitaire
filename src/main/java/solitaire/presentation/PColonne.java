@@ -65,9 +65,8 @@ public class PColonne extends JPanel {
 		ds.addDragSourceListener(new MyDragSourceListener());
 		ds.createDefaultDragGestureRecognizer(visibles,
 				DnDConstants.ACTION_MOVE, new MyDragGestureListener());
-		//TODO Ajout du listener SourceMotionListener
-		//myDragSourceMotionListener = new MyDragSourceMotionListener();
-		//ds.addDragSourceMotionListener(myDragSourceMotionListener);
+		myDragSourceMotionListener = new MyDragSourceMotionListener();
+		ds.addDragSourceMotionListener(myDragSourceMotionListener);
 	}
 
 	public void activerRetournerCarte() {
@@ -110,8 +109,6 @@ public class PColonne extends JPanel {
 			selectedCard.setLocation(1 + event.getX(), 1 + event.getY());
 		}
 	}
-
-
 
 	protected class MyDragGestureListener implements DragGestureListener {
 		public void dragGestureRecognized(DragGestureEvent dge) {

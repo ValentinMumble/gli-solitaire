@@ -9,6 +9,7 @@ import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DragSourceMotionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 import solitaire.controle.CCarte;
 import solitaire.controle.CSabot;
 import solitaire.controle.CTasDeCartes;
+import solitaire.presentation.PColonne.MyDragSourceMotionListener;
 
 public class PSabot extends JPanel {
 
@@ -37,6 +39,7 @@ public class PSabot extends JPanel {
 	protected DragGestureEvent theInitialEvent;
 	protected DragSource ds = null;
 	private PCarte selected;
+	protected MyDragSourceMotionListener myDragSourceMotionListener = null;
 
 	public PSabot(CSabot cSabot, PTasDeCartes c, PTasDeCartes v) {
 		controle = cSabot;
@@ -55,6 +58,8 @@ public class PSabot extends JPanel {
 				new MyDragGestureListener ()) ;
 		ds.addDragSourceListener (
 				new MyDragSourceListener ()) ;
+		myDragSourceMotionListener = new MyDragSourceMotionListener();
+		//ds.addDragSourceMotionListener(myDragSourceMotionListener);
 	}
 
 	public void activerRetournerCarte() {
@@ -71,6 +76,12 @@ public class PSabot extends JPanel {
 
 	public void desactiverRetournerTas() {
 		cachees.removeMouseListener(rtl);
+	}
+	
+	class MyDragSourceMotionListener implements DragSourceMotionListener {
+		public void dragMouseMoved(DragSourceDragEvent event) {
+			selected.setLocation(1 + event.getX() - (selected.getWidth() / 2), 1 + event.getY()-10);
+		}
 	}
 
 	protected class MyDragGestureListener implements DragGestureListener {

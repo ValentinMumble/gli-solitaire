@@ -13,8 +13,8 @@ public class CCarte extends Carte {
 		p.setFaceVisible(isFaceVisible());
 	}
 	
-	public void setFaceVisible(boolean v) {
-		super.setFaceVisible(v);
+	public void setFaceVisible(boolean b) {
+		super.setFaceVisible(b);
 		p.setFaceVisible(isFaceVisible());
 	}
 	

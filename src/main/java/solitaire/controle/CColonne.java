@@ -28,7 +28,7 @@ public class CColonne extends Colonne {
 	@Override
 	public void depiler() throws Exception {
 		super.depiler();
-		if (visibles.isVide()){
+		if (visibles.isVide() && !cachees.isVide()){
 			p.setCorrectSize(0, 0);
 		}
 		if (isCarteRetournable()) {
@@ -86,12 +86,15 @@ public class CColonne extends Colonne {
 				selectedCards.empiler(curCCarte);
 				depiler();
 			}
-			/*while(selectedCards!=null)
+			selectedCardsbis = new CTasDeCartes("tasbis", new CUsine());
+			while(selectedCards.getNombre()!=0)
 			{
-				curCCarte = (CCarte)(selectedCards.getSommet());
-				selectedCardsbis.empiler(curCCarte);
+				CCarte curCCartebis = (CCarte)(selectedCards.getSommet());
+				selectedCardsbis.empiler(curCCartebis);
 				selectedCards.depiler();
-			}*/
+			}
+			selectedCards = selectedCardsbis;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

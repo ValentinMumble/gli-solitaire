@@ -13,7 +13,6 @@ import javax.swing.BorderFactory;
 
 import solitaire.controle.CTasDeCartes;
 import solitaire.controle.CTasDeCartesColorees;
-import solitaire.controle.ICTasDeCartes;
 
 public class PTasDeCartesColorees extends PTasDeCartes {
 
