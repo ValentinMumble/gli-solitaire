@@ -24,13 +24,13 @@ public class PTasDeCartes extends JPanel implements Transferable {
 
 	public PTasDeCartes(ICTasDeCartes c) {
 		setLayout(null);
-		setSize(PColonne.COL_WIDTH, PCarte.HEIGHT);
+		setSize(PCarte.WIDTH, PCarte.HEIGHT);
 		setPreferredSize(getSize());
 		setOpaque(false);
 		controle = c;
 		dx = 0;
 		dy = 0;
-		x = 2;
+		x = 0;
 		y = 0;
 	}
 
@@ -47,7 +47,7 @@ public class PTasDeCartes extends JPanel implements Transferable {
 		add(pCarte, 0);
 		pCarte.setLocation(x, y);
 		if (getWidth() == 0 && getHeight() == 0) {
-			setSize(PColonne.COL_WIDTH, PCarte.HEIGHT);
+			setSize(PCarte.WIDTH, PCarte.HEIGHT);
 		} else {
 			setSize(getWidth() + Math.abs(dx), getHeight() + Math.abs(dy));
 		}

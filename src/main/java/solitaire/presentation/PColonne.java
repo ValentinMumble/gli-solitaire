@@ -1,5 +1,6 @@
 package solitaire.presentation;
 
+import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
@@ -30,7 +31,7 @@ public class PColonne extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final int COL_WIDTH = 90;
+	public static final int WIDTH = 90;
 
 	public static final int DY = 15;
 
@@ -46,6 +47,8 @@ public class PColonne extends JPanel {
 	protected DragSource ds = null;
 	private PCarte selectedCard;
 	protected MyDragSourceMotionListener myDragSourceMotionListener = null;
+	
+	private int offsetx;
 
 	public PColonne(CColonne cColonne, PTasDeCartes c, PTasDeCartesAlternees v) {
 		controle = cColonne;
@@ -53,10 +56,13 @@ public class PColonne extends JPanel {
 		visibles = v;
 		rcl = new RetournerCarteListener();
 		setLayout(null);
-		setSize(90, 500);
+		setBackground(Color.DARK_GRAY);
+		setSize(WIDTH, 350);
 		setPreferredSize(getSize());
 		add(cachees);
 		add(visibles, 0);
+		offsetx = (WIDTH - PCarte.WIDTH) / 2;
+		cachees.setLocation(offsetx, 0);
 		cachees.setDxDy(0, DY);
 		visibles.setDxDy(0, DY);
 		
@@ -188,7 +194,7 @@ public class PColonne extends JPanel {
 	}
 
 	public void c2p_showEmpilable() {
-
+		
 	}
 
 	public void c2p_showNonEmpilable() {
@@ -209,7 +215,7 @@ public class PColonne extends JPanel {
 	}
 
 	public void setCorrectLocation() {
-		visibles.setLocation(0, cachees.getHeight() - (PCarte.HEIGHT));
+		visibles.setLocation(offsetx, cachees.getHeight() - (PCarte.HEIGHT));
 	}
 
 	public void setCorrectSize(int i, int j) {

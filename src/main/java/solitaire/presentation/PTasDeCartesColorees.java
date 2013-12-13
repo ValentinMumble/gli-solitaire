@@ -28,7 +28,7 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		super(c);
 		controle = c;
 		setLayout(null);
-		setSize(80, 100);
+		setSize(PColonne.WIDTH, 100);
 		setPreferredSize(getSize());
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		dropTarget = new DropTarget(this, new MyDropTargetListener()) ;
