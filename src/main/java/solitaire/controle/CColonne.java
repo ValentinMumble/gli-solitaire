@@ -38,6 +38,7 @@ public class CColonne extends Colonne {
 
 	public void retournerCarte() throws Exception {
 		super.retournerCarte();
+		p.setCorrectLocation();
 		p.desactiverRetournerCarte();
 	}
 

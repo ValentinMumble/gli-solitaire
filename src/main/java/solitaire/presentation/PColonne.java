@@ -209,7 +209,7 @@ public class PColonne extends JPanel {
 	}
 
 	public void setCorrectLocation() {
-		visibles.setLocation(0, cachees.getHeight() - (99 + DY));
+		visibles.setLocation(0, cachees.getHeight() - (PCarte.HEIGHT));
 	}
 
 	public void setCorrectSize(int i, int j) {
