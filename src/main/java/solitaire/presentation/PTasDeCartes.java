@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import solitaire.controle.ICTasDeCartes;
 
-public class PTasDeCartes extends JPanel implements Transferable{
+public class PTasDeCartes extends JPanel implements Transferable {
 
 	/**
 	 * 
@@ -24,7 +24,7 @@ public class PTasDeCartes extends JPanel implements Transferable{
 
 	public PTasDeCartes(ICTasDeCartes c) {
 		setLayout(null);
-		setSize(72, 96);
+		setSize(PColonne.COL_WIDTH, PCarte.HEIGHT);
 		setPreferredSize(getSize());
 		setOpaque(false);
 		controle = c;
@@ -46,10 +46,9 @@ public class PTasDeCartes extends JPanel implements Transferable{
 	public void empiler(PCarte pCarte) {
 		add(pCarte, 0);
 		pCarte.setLocation(x, y);
-		if (getWidth() == 0 && getHeight()==0){
-			setSize(72, 96);
-		}
-		else { 
+		if (getWidth() == 0 && getHeight() == 0) {
+			setSize(PColonne.COL_WIDTH, PCarte.HEIGHT);
+		} else {
 			setSize(getWidth() + Math.abs(dx), getHeight() + Math.abs(dy));
 		}
 		setPreferredSize(getSize());

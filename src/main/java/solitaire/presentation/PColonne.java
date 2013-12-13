@@ -1,6 +1,5 @@
 package solitaire.presentation;
 
-import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
@@ -19,7 +18,6 @@ import java.awt.dnd.DropTargetListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import solitaire.controle.CColonne;
@@ -31,6 +29,8 @@ public class PColonne extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public static final int COL_WIDTH = 90;
 
 	public static final int DY = 15;
 
@@ -53,13 +53,15 @@ public class PColonne extends JPanel {
 		visibles = v;
 		rcl = new RetournerCarteListener();
 		setLayout(null);
-		setSize(80, 300);
+		setSize(90, 500);
 		setPreferredSize(getSize());
 		add(cachees);
 		add(visibles, 0);
 		cachees.setDxDy(0, DY);
 		visibles.setDxDy(0, DY);
-		visibles.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		//visibles.setBorder(BorderFactory.createLineBorder(Color.black));
+		
 		dropTarget = new DropTarget(visibles, new MyDropTargetListener());
 		ds = new DragSource();
 		ds.addDragSourceListener(new MyDragSourceListener());
@@ -115,8 +117,8 @@ public class PColonne extends JPanel {
 			theInitialEvent = dge;
 			selectedCard = null;
 			try {
-				selectedCard = (PCarte) visibles
-						.getComponentAt(dge.getDragOrigin());
+				selectedCard = (PCarte) visibles.getComponentAt(dge
+						.getDragOrigin());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -126,8 +128,7 @@ public class PColonne extends JPanel {
 	}
 
 	public void c2p_debutDnDOK(PTasDeCartes pt) {
-		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop,
-				pt, dsl);
+		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, pt, dsl);
 	}
 
 	public void c2p_debutDnDKO(PTasDeCartes pt) {
@@ -154,17 +155,19 @@ public class PColonne extends JPanel {
 
 	protected class MyDropTargetListener implements DropTargetListener {
 		PTasDeCartes pc;
+
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
 				pc = (PTasDeCartes) event.getTransferable().getTransferData(
 						new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
-				controle.p2c_dragEnter((CTasDeCartes)pc.getControle());
-			} catch (Exception e) {}
+				controle.p2c_dragEnter((CTasDeCartes) pc.getControle());
+			} catch (Exception e) {
+			}
 		}
 
 		public void dragExit(DropTargetEvent event) {
-			if (pc != null){
-				controle.p2c_dragExit((CTasDeCartes)pc.getControle());
+			if (pc != null) {
+				controle.p2c_dragExit((CTasDeCartes) pc.getControle());
 			}
 		}
 
@@ -174,7 +177,7 @@ public class PColonne extends JPanel {
 
 		public void drop(DropTargetDropEvent event) {
 			theFinalEvent = event;
-			controle.p2c_drop((CTasDeCartes)pc.getControle());
+			controle.p2c_drop((CTasDeCartes) pc.getControle());
 
 		}
 
@@ -204,7 +207,6 @@ public class PColonne extends JPanel {
 		theFinalEvent.acceptDrop(DnDConstants.ACTION_MOVE);
 		theFinalEvent.getDropTargetContext().dropComplete(true);
 	}
-
 
 	public void setCorrectLocation() {
 		visibles.setLocation(0, cachees.getHeight() - (99 + DY));

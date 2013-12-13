@@ -26,7 +26,7 @@ public class PCarte extends JPanel implements Transferable {
 	protected JLabel face, dos;
 	protected ImageIcon icone; // image de la face
 	protected static ImageIcon iconeDos; // image du dos
-	public static int largeur, hauteur;
+	public static int WIDTH, HEIGHT;
 
 	/**
 	 * initialiser une carte
@@ -42,13 +42,13 @@ public class PCarte extends JPanel implements Transferable {
 		face = new JLabel(icone);
 		add(face);
 		face.setLocation(0, 0);
-		face.setSize(largeur, hauteur);
+		face.setSize(WIDTH, HEIGHT);
 
 		// image du dos
 		dos = new JLabel(iconeDos);
 		add(dos);
 		dos.setLocation(0, 0);
-		dos.setSize(largeur, hauteur);
+		dos.setSize(WIDTH, HEIGHT);
 
 		// le JPanel
 		setLayout(null);
@@ -81,10 +81,9 @@ public class PCarte extends JPanel implements Transferable {
 	 * initialiser l'image du dos et les dimensions d'une PCarte
 	 */
 	static {
-		iconeDos = new ImageIcon(
-				ClassLoader.getSystemResource("dos.jpg"));
-		largeur = iconeDos.getIconWidth() + 2;
-		hauteur = iconeDos.getIconHeight() + 2;
+		iconeDos = new ImageIcon(ClassLoader.getSystemResource("dos.jpg"));
+		WIDTH = iconeDos.getIconWidth() + 2;
+		HEIGHT = iconeDos.getIconHeight() + 2;
 	}
 
 	public CCarte getControle() {

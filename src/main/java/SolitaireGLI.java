@@ -1,14 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,7 +17,6 @@ import solitaire.controle.CColonne;
 import solitaire.controle.CSabot;
 import solitaire.controle.CTasDeCartesColorees;
 import solitaire.controle.CUsine;
-
 
 public class SolitaireGLI extends Solitaire {
 
@@ -45,7 +38,8 @@ public class SolitaireGLI extends Solitaire {
 		JFrame f = new JFrame("Solitaire");
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setLayout(new BorderLayout()); // au lieu de BorderLayout par defaut
-		f.getContentPane().setBackground(new Color(143, 143, 195)); // violet pele
+		f.getContentPane().setBackground(new Color(143, 143, 195)); // violet
+																	// pele
 
 		// Creation des usines
 		CUsine cu = new CUsine();
@@ -62,11 +56,10 @@ public class SolitaireGLI extends Solitaire {
 			JPanel uneCouleur = new JPanel();
 			uneCouleur.setLayout(new GridLayout(2, 1));
 			uneCouleur.add(((CTasDeCartesColorees) t).getPresentation());
-			String nom = ((CTasDeCartesColorees) t).getNom();
-			System.out.println(nom);
-			//TODO background tas
-			//ImageIcon image = new ImageIcon(ClassLoader.getSystemResource(nom+".png"));
-			uneCouleur.add(new JLabel(nom));
+			String fileName = ((CTasDeCartesColorees) t).getNom().trim()
+					+ ".png";
+			ImageIcon image = new ImageIcon(ClassLoader.getSystemResource(fileName));
+			uneCouleur.add(new JLabel(image));
 			couleurs.add(uneCouleur);
 		}
 
@@ -84,5 +77,5 @@ public class SolitaireGLI extends Solitaire {
 		f.setVisible(true); // et le rendre visible
 		solitaire.jouer();
 	} // main
-	
+
 }
