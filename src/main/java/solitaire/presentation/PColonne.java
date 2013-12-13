@@ -26,14 +26,14 @@ import solitaire.controle.CTasDeCartes;
 
 public class PColonne extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final int WIDTH = 90;
 
 	public static final int DY = 15;
+	public static final Color NEUTRE = new Color(224, 224, 224);
+	public static final Color EMPILABLE = new Color(204, 255, 204);
+	public static final Color NON_EMPILABLE = new Color(255, 204, 204);
 
 	private CColonne controle;
 
@@ -47,7 +47,7 @@ public class PColonne extends JPanel {
 	protected DragSource ds = null;
 	private PCarte selectedCard;
 	protected MyDragSourceMotionListener myDragSourceMotionListener = null;
-	
+
 	private int offsetx;
 
 	public PColonne(CColonne cColonne, PTasDeCartes c, PTasDeCartesAlternees v) {
@@ -56,7 +56,7 @@ public class PColonne extends JPanel {
 		visibles = v;
 		rcl = new RetournerCarteListener();
 		setLayout(null);
-		setBackground(Color.DARK_GRAY);
+		setBackground(NEUTRE);
 		setSize(WIDTH, 350);
 		setPreferredSize(getSize());
 		add(cachees);
@@ -65,9 +65,7 @@ public class PColonne extends JPanel {
 		cachees.setLocation(offsetx, 0);
 		cachees.setDxDy(0, DY);
 		visibles.setDxDy(0, DY);
-		
-		//visibles.setBorder(BorderFactory.createLineBorder(Color.black));
-		
+
 		dropTarget = new DropTarget(visibles, new MyDropTargetListener());
 		ds = new DragSource();
 		ds.addDragSourceListener(new MyDragSourceListener());
@@ -95,19 +93,15 @@ public class PColonne extends JPanel {
 		}
 
 		public void mouseEntered(MouseEvent e) {
-
 		}
 
 		public void mouseExited(MouseEvent e) {
-
 		}
 
 		public void mousePressed(MouseEvent e) {
-
 		}
 
 		public void mouseReleased(MouseEvent e) {
-
 		}
 
 	}
@@ -194,15 +188,15 @@ public class PColonne extends JPanel {
 	}
 
 	public void c2p_showEmpilable() {
-		
+		setBackground(EMPILABLE);
 	}
 
 	public void c2p_showNonEmpilable() {
-
+		setBackground(NON_EMPILABLE);
 	}
 
 	public void c2p_showNeutre() {
-
+		setBackground(NEUTRE);
 	}
 
 	public void c2p_dropKO() {

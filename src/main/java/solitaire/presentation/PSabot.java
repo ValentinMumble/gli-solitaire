@@ -22,10 +22,8 @@ import solitaire.controle.CTasDeCartes;
 
 public class PSabot extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	public static final int HEIGHT = 110;
 
 	private CSabot controle;
 
@@ -51,12 +49,10 @@ public class PSabot extends JPanel {
 		visibles.setDxDy(15, 0);
 		rtl = new RetournerTasListener();
 		rcl = new RetournerCarteListener();
-		ds = new DragSource () ;
-		ds.createDefaultDragGestureRecognizer (
-				visibles, DnDConstants.ACTION_MOVE,
-				new MyDragGestureListener ()) ;
-		ds.addDragSourceListener (
-				new MyDragSourceListener ()) ;
+		ds = new DragSource();
+		ds.createDefaultDragGestureRecognizer(visibles,
+				DnDConstants.ACTION_MOVE, new MyDragGestureListener());
+		ds.addDragSourceListener(new MyDragSourceListener());
 		myDragSourceMotionListener = new MyDragSourceMotionListener();
 		ds.addDragSourceMotionListener(myDragSourceMotionListener);
 	}
@@ -76,10 +72,11 @@ public class PSabot extends JPanel {
 	public void desactiverRetournerTas() {
 		cachees.removeMouseListener(rtl);
 	}
-	
+
 	class MyDragSourceMotionListener implements DragSourceMotionListener {
 		public void dragMouseMoved(DragSourceDragEvent event) {
-			selected.setLocation(1 + event.getX() - (selected.getWidth() / 2), 1 + event.getY()-10);
+			selected.setLocation(1 + event.getX() - (selected.getWidth() / 2),
+					1 + event.getY() - 10);
 		}
 	}
 
@@ -89,7 +86,8 @@ public class PSabot extends JPanel {
 			selected = null;
 			CCarte cc = null;
 			try {
-				selected = (PCarte) visibles.getComponentAt(dge.getDragOrigin());
+				selected = (PCarte) visibles
+						.getComponentAt(dge.getDragOrigin());
 				cc = selected.getControle();
 			} catch (Exception e) {
 			}

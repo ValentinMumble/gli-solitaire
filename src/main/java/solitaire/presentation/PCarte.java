@@ -18,9 +18,6 @@ import solitaire.controle.CCarte;
  */
 public class PCarte extends JPanel implements Transferable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	protected CCarte controle; // controleur associe
 	protected JLabel face, dos;
@@ -84,7 +81,6 @@ public class PCarte extends JPanel implements Transferable {
 		iconeDos = new ImageIcon(ClassLoader.getSystemResource("dos.jpg"));
 		WIDTH = iconeDos.getIconWidth() + 2;
 		HEIGHT = iconeDos.getIconHeight() + 2;
-		System.out.println(WIDTH);
 	}
 
 	public CCarte getControle() {

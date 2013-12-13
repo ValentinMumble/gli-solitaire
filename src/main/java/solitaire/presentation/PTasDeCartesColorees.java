@@ -1,6 +1,5 @@
 package solitaire.presentation;
 
-import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -9,16 +8,11 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 
-import javax.swing.BorderFactory;
-
 import solitaire.controle.CTasDeCartes;
 import solitaire.controle.CTasDeCartesColorees;
 
 public class PTasDeCartesColorees extends PTasDeCartes {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private DropTargetDropEvent theFinalEvent;
 	protected DropTarget dropTarget = null ;
@@ -28,9 +22,7 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		super(c);
 		controle = c;
 		setLayout(null);
-		setSize(PColonne.WIDTH, 100);
 		setPreferredSize(getSize());
-		setBorder(BorderFactory.createLineBorder(Color.black));
 		dropTarget = new DropTarget(this, new MyDropTargetListener()) ;
 	}
 

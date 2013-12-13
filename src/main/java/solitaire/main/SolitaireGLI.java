@@ -1,8 +1,9 @@
+package solitaire.main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +18,9 @@ import solitaire.controle.CColonne;
 import solitaire.controle.CSabot;
 import solitaire.controle.CTasDeCartesColorees;
 import solitaire.controle.CUsine;
+import solitaire.presentation.PColonne;
+import solitaire.presentation.PSabot;
+import solitaire.presentation.PTasDeCartes;
 
 public class SolitaireGLI extends Solitaire {
 
@@ -54,12 +58,30 @@ public class SolitaireGLI extends Solitaire {
 
 		for (TasDeCartesColorees t : solitaire.pilesColorees) {
 			JPanel uneCouleur = new JPanel();
-			uneCouleur.setLayout(new GridLayout(2, 1));
-			uneCouleur.add(((CTasDeCartesColorees) t).getPresentation());
+			uneCouleur.setLayout(null);
+			uneCouleur.setSize(PColonne.WIDTH, PSabot.HEIGHT);
+			uneCouleur.setPreferredSize(uneCouleur.getSize());
+			uneCouleur.setBorder(BorderFactory.createLineBorder(Color.black));
+
+			PTasDeCartes presentation = ((CTasDeCartesColorees) t)
+					.getPresentation();
+			uneCouleur.add(presentation);
+			int x = uneCouleur.getWidth() / 2 - presentation.getWidth() / 2;
+			int y = uneCouleur.getHeight() / 2 - presentation.getHeight() / 2;
+			presentation.setLocation(x, y);
+			
 			String fileName = ((CTasDeCartesColorees) t).getNom().trim()
 					+ ".png";
-			ImageIcon image = new ImageIcon(ClassLoader.getSystemResource(fileName));
-			uneCouleur.add(new JLabel(image));
+			ImageIcon image = new ImageIcon(
+					ClassLoader.getSystemResource(fileName));
+			JLabel labelImage = new JLabel(image);
+			labelImage.setSize(image.getIconWidth(), image.getIconHeight());
+			labelImage.setPreferredSize(labelImage.getSize());
+			uneCouleur.add(labelImage);
+			x = uneCouleur.getWidth() / 2 - labelImage.getWidth() / 2;
+			y = uneCouleur.getHeight() / 2 - labelImage.getHeight() / 2;
+			labelImage.setLocation(x, y);
+			
 			couleurs.add(uneCouleur);
 		}
 
@@ -71,7 +93,7 @@ public class SolitaireGLI extends Solitaire {
 		haut.add(couleurs, BorderLayout.EAST);
 		f.getContentPane().add(haut, BorderLayout.NORTH);
 		f.getContentPane().add(colonnes, BorderLayout.CENTER);
-		f.setMinimumSize(new Dimension(1000, 800));
+		f.setMinimumSize(new Dimension(800, 600));
 		f.pack(); // dimensionner le cadre
 		f.setLocation(200, 100); // le positionner
 		f.setVisible(true); // et le rendre visible
