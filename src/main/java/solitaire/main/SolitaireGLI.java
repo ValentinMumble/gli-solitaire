@@ -93,7 +93,7 @@ public class SolitaireGLI extends Solitaire {
 		haut.add(couleurs, BorderLayout.EAST);
 		f.getContentPane().add(haut, BorderLayout.NORTH);
 		f.getContentPane().add(colonnes, BorderLayout.CENTER);
-		f.setMinimumSize(new Dimension(800, 600));
+		f.setMinimumSize(new Dimension(950, 600));
 		f.pack(); // dimensionner le cadre
 		f.setLocation(200, 100); // le positionner
 		f.setVisible(true); // et le rendre visible
