@@ -25,6 +25,7 @@ public class PSabot extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public static final int HEIGHT = 110;
+	public static final int DX = 15;
 
 	private CSabot controle;
 
@@ -45,9 +46,10 @@ public class PSabot extends JPanel {
 		visibles = v;
 		add(cachees);
 		add(visibles);
-		cachees.setBorder(BorderFactory.createLineBorder(Color.black));
+		setBorder(BorderFactory.createLineBorder(Color.black));
+		setBackground(PColonne.NEUTRE);
 		cachees.setDxDy(0, 0);
-		visibles.setDxDy(15, 0);
+		visibles.setDxDy(DX, 0);
 		rtl = new RetournerTasListener();
 		rcl = new RetournerCarteListener();
 		ds = new DragSource();
@@ -77,7 +79,8 @@ public class PSabot extends JPanel {
 	class MyDragSourceMotionListener implements DragSourceMotionListener {
 		public void dragMouseMoved(DragSourceDragEvent event) {
 			Point p = getParent().getParent().getLocationOnScreen();
-			selected.setLocation(event.getX()-p.x-35, event.getY()-p.y-48);	
+			selected.setLocation(event.getX() - p.x - PCarte.WIDTH / 2,
+					event.getY() - p.y - PCarte.HEIGHT / 2);
 			repaint();
 		}
 	}
@@ -164,13 +167,12 @@ public class PSabot extends JPanel {
 	}
 
 	public void c2p_debutDnDOK(PTasDeCartes pt) {
-		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop,
-				pt, dsl);
+		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, pt, dsl);
 		CTasDeCartes ct = (CTasDeCartes) pt.getControle();
 		try {
-			CCarte cc = (CCarte)ct.getSommet();
+			CCarte cc = (CCarte) ct.getSommet();
 			selected = cc.getPresentation();
-			getRootPane().add(selected,0);
+			getRootPane().add(selected, 0);
 			repaint();
 		} catch (Exception e) {
 			e.printStackTrace();

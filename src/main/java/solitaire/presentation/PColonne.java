@@ -22,10 +22,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
-import solitaire.controle.CCarte;
 import solitaire.controle.CColonne;
 import solitaire.controle.CTasDeCartes;
-import solitaire.controle.CUsine;
 
 public class PColonne extends JPanel {
 
@@ -34,9 +32,9 @@ public class PColonne extends JPanel {
 	public static final int WIDTH = 90;
 
 	public static final int DY = 15;
-	public static final Color NEUTRE = new Color(224, 224, 224);
-	public static final Color EMPILABLE = new Color(204, 255, 204);
-	public static final Color NON_EMPILABLE = new Color(255, 204, 204);
+	public static final Color NEUTRE = new Color(0, 90, 0);
+	public static final Color EMPILABLE = new Color(0, 51, 102);
+	public static final Color NON_EMPILABLE = new Color(102, 0, 0);
 
 	private CColonne controle;
 
@@ -113,7 +111,8 @@ public class PColonne extends JPanel {
 	class MyDragSourceMotionListener implements DragSourceMotionListener {
 		public void dragMouseMoved(DragSourceDragEvent event) {
 			Point p = getParent().getParent().getLocationOnScreen();
-			selecCards.setLocation(event.getX()-p.x-35, event.getY()-p.y-48);	
+			selecCards.setLocation(event.getX() - p.x - PCarte.WIDTH / 2,
+					event.getY() - p.y - PCarte.HEIGHT / 2);
 			repaint();
 		}
 	}
@@ -136,7 +135,7 @@ public class PColonne extends JPanel {
 	public void c2p_debutDnDOK(PTasDeCartes pt) {
 		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, pt, dsl);
 		selecCards = pt;
-		getRootPane().add(selecCards,0);
+		getRootPane().add(selecCards, 0);
 		repaint();
 	}
 

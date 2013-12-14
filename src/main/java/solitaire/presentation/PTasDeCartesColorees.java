@@ -15,7 +15,7 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 
 	private static final long serialVersionUID = 1L;
 	private DropTargetDropEvent theFinalEvent;
-	protected DropTarget dropTarget = null ;
+	protected DropTarget dropTarget = null;
 	private CTasDeCartesColorees controle;
 
 	public PTasDeCartesColorees(CTasDeCartesColorees c) {
@@ -23,29 +23,33 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		controle = c;
 		setLayout(null);
 		setPreferredSize(getSize());
-		dropTarget = new DropTarget(this, new MyDropTargetListener()) ;
+		dropTarget = new DropTarget(this, new MyDropTargetListener());
 	}
 
 	protected class MyDropTargetListener implements DropTargetListener {
 		PTasDeCartes pc;
+
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
-				pc = (PTasDeCartes)event.getTransferable().getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
-				controle.p2c_dragEnter((CTasDeCartes)pc.getControle());
-			} catch (Exception e) {}
+				pc = (PTasDeCartes) event.getTransferable().getTransferData(
+						new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+				controle.p2c_dragEnter((CTasDeCartes) pc.getControle());
+			} catch (Exception e) {
+			}
 		}
 
 		public void dragExit(DropTargetEvent event) {
-			if (pc != null){
-				controle.p2c_dragExit((CTasDeCartes)pc.getControle());
+			if (pc != null) {
+				controle.p2c_dragExit((CTasDeCartes) pc.getControle());
 			}
 		}
+
 		public void dragOver(DropTargetDragEvent event) {
 		}
 
 		public void drop(DropTargetDropEvent event) {
 			theFinalEvent = event;
-			controle.p2c_drop((CTasDeCartes)pc.getControle());
+			controle.p2c_drop((CTasDeCartes) pc.getControle());
 		}
 
 		public void dropActionChanged(DropTargetDragEvent arg0) {

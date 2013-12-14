@@ -1,9 +1,8 @@
 package solitaire.main;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -26,40 +25,39 @@ import solitaire.presentation.PTasDeCartes;
 
 public class SolitaireGLI extends Solitaire {
 
-	public SolitaireGLI(String arg0, Usine arg1) {
-		super(arg0, arg1);
+	private JPanel sabotp;
+	private JPanel couleurs;
+	private JPanel colonnes;
+	private JPanel haut;
+	private JFrame frame;
+
+	public SolitaireGLI(String name, Usine usine) {
+		super(name, usine);
+		sabotp = new JPanel();
+		couleurs = new JPanel();
+		colonnes = new JPanel();
+		haut = new JPanel();
+		frame = new JFrame(name);
 	}
 
 	@Override
 	public void initialiser() {
 		super.initialiser();
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout()); // au lieu de BorderLayout par
+												// defaut
+		frame.getContentPane().setBackground(new Color(0, 102, 0)); // violet
+																	// pele
 
-	}
-	
+		colonnes.setOpaque(false);
+		haut.setOpaque(false);
+		couleurs.setOpaque(false);
+		sabotp.setOpaque(false);
+		sabotp.add(((CSabot) sabot).getPresentation());
 
-	public static void main(String args[]) {
-		JPanel sabot = new JPanel();
-		JPanel couleurs = new JPanel();
-		JPanel colonnes = new JPanel();
-		JPanel haut = new JPanel();
-		JFrame f = new JFrame("Solitaire");
-		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		f.setLayout(new BorderLayout()); // au lieu de BorderLayout par defaut
-		f.getContentPane().setBackground(new Color(143, 143, 195)); // violet pele
-		
-		// Creation des usines
-		CUsine cu = new CUsine();
-
-		// Creation du solitaire
-		SolitaireGLI solitaire = new SolitaireGLI("Solitaire GLI", cu);
-
-		// Initialisation du solitaire
-		solitaire.initialiser();
-
-		sabot.add(((CSabot) solitaire.sabot).getPresentation());
-
-		for (TasDeCartesColorees t : solitaire.pilesColorees) {
+		for (TasDeCartesColorees t : pilesColorees) {
 			JPanel uneCouleur = new JPanel();
+			uneCouleur.setOpaque(false);
 			uneCouleur.setLayout(null);
 			uneCouleur.setSize(PColonne.WIDTH, PSabot.HEIGHT);
 			uneCouleur.setPreferredSize(uneCouleur.getSize());
@@ -71,7 +69,7 @@ public class SolitaireGLI extends Solitaire {
 			int x = uneCouleur.getWidth() / 2 - presentation.getWidth() / 2;
 			int y = uneCouleur.getHeight() / 2 - presentation.getHeight() / 2;
 			presentation.setLocation(x, y);
-			
+
 			String fileName = ((CTasDeCartesColorees) t).getNom().trim()
 					+ ".png";
 			ImageIcon image = new ImageIcon(
@@ -83,24 +81,36 @@ public class SolitaireGLI extends Solitaire {
 			x = uneCouleur.getWidth() / 2 - labelImage.getWidth() / 2;
 			y = uneCouleur.getHeight() / 2 - labelImage.getHeight() / 2;
 			labelImage.setLocation(x, y);
-			
+
 			couleurs.add(uneCouleur);
 		}
 
-		for (Colonne c : solitaire.pilesAlternees) {
+		for (Colonne c : pilesAlternees) {
 			colonnes.add(((CColonne) c).getPresentation());
 		}
 
-		haut.add(sabot, BorderLayout.WEST);
+		haut.add(sabotp, BorderLayout.WEST);
 		haut.add(couleurs, BorderLayout.EAST);
-		f.getContentPane().add(haut, BorderLayout.NORTH);
-		f.getContentPane().add(colonnes, BorderLayout.CENTER);
-		f.setMinimumSize(new Dimension(950, 600));
-		f.pack(); // dimensionner le cadre
-		f.setLocation(200, 100); // le positionner
-		f.setVisible(true); // et le rendre visible
-		f.setResizable(false);
+
+		frame.getContentPane().add(haut, BorderLayout.NORTH);
+		frame.getContentPane().add(colonnes, BorderLayout.CENTER);
+		frame.setMinimumSize(new Dimension(950, 600));
+		frame.pack(); // dimensionner le cadre
+		frame.setLocation(200, 100); // le positionner
+		frame.setVisible(true); // et le rendre visible
+		frame.setResizable(false);
+	}
+
+	public static void main(String args[]) {
+		// Creation des usines
+		CUsine cu = new CUsine();
+
+		// Creation du solitaire
+		SolitaireGLI solitaire = new SolitaireGLI("Solitaire GLI", cu);
+
+		// Initialisation du solitaire
+		solitaire.initialiser();
 		solitaire.jouer();
-	} // main
+	}
 
 }

@@ -10,7 +10,6 @@ public class CColonne extends Colonne {
 	private CTasDeCartes selectedCards;
 	private CTasDeCartes selectedCardsbis;
 
-
 	public CColonne(String nom, CUsine u) {
 		super(nom, u);
 		p = new PColonne(this, ((CTasDeCartes) cachees).getPresentation(),
@@ -28,7 +27,7 @@ public class CColonne extends Colonne {
 	@Override
 	public void depiler() throws Exception {
 		super.depiler();
-		if (visibles.isVide() && !cachees.isVide()){
+		if (visibles.isVide() && !cachees.isVide()) {
 			p.setCorrectSize(0, 0);
 		}
 		if (isCarteRetournable()) {
@@ -46,9 +45,9 @@ public class CColonne extends Colonne {
 		return p;
 	}
 
-	public void p2c_dragEnter (CTasDeCartes ct) {
+	public void p2c_dragEnter(CTasDeCartes ct) {
 		try {
-			if (isEmpilable(ct.getBase())){
+			if (isEmpilable(ct.getBase())) {
 				p.c2p_showEmpilable();
 			} else {
 				p.c2p_showNonEmpilable();
@@ -63,7 +62,7 @@ public class CColonne extends Colonne {
 
 	public void p2c_drop(CTasDeCartes ct) {
 		try {
-			if (isEmpilable(ct)){
+			if (isEmpilable(ct)) {
 				empiler(ct);
 				p.c2p_dropOK();
 			} else {
@@ -78,37 +77,34 @@ public class CColonne extends Colonne {
 		try {
 			CCarte curCCarte = null;
 			selectedCards = new CTasDeCartes("tas", new CUsine());
-			curCCarte = (CCarte)(visibles.getSommet());
+			curCCarte = (CCarte) (visibles.getSommet());
 			selectedCards.empiler(curCCarte);
 			depiler();
-			while(curCCarte!=selectedCard && curCCarte!=null)
-			{
-				curCCarte = (CCarte)(visibles.getSommet());
+			while (curCCarte != selectedCard && curCCarte != null) {
+				curCCarte = (CCarte) (visibles.getSommet());
 				selectedCards.empiler(curCCarte);
 				depiler();
 			}
 			selectedCardsbis = new CTasDeCartes("tasbis", new CUsine());
-			while(selectedCards.getNombre()!=0)
-			{
-				CCarte curCCartebis = (CCarte)(selectedCards.getSommet());
+			while (selectedCards.getNombre() != 0) {
+				CCarte curCCartebis = (CCarte) (selectedCards.getSommet());
 				selectedCardsbis.empiler(curCCartebis);
 				selectedCards.depiler();
 			}
 			selectedCards = selectedCardsbis;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (selectedCards.getNombre()>0){
+		if (selectedCards.getNombre() > 0) {
 			p.c2p_debutDnDOK(selectedCards.getPresentation());
-		}
-		else {
+		} else {
 			p.c2p_debutDnDKO(selectedCards.getPresentation());
 		}
 	}
 
 	public void p2c_dragDropEnd(boolean dropSuccess) {
-		if (! dropSuccess){
+		if (!dropSuccess) {
 			empiler(selectedCards);
 		}
 	}

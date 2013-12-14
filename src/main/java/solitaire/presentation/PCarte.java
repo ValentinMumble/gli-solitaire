@@ -35,7 +35,7 @@ public class PCarte extends JPanel implements Transferable {
 		this.controle = controle;
 
 		// image de la face
-		icone = new ImageIcon(ClassLoader.getSystemResource(chaine + ".gif"));
+		icone = new ImageIcon(ClassLoader.getSystemResource(chaine + ".png"));
 		face = new JLabel(icone);
 		add(face);
 		face.setLocation(0, 0);
@@ -78,9 +78,9 @@ public class PCarte extends JPanel implements Transferable {
 	 * initialiser l'image du dos et les dimensions d'une PCarte
 	 */
 	static {
-		iconeDos = new ImageIcon(ClassLoader.getSystemResource("dos.jpg"));
-		WIDTH = iconeDos.getIconWidth() + 2;
-		HEIGHT = iconeDos.getIconHeight() + 2;
+		iconeDos = new ImageIcon(ClassLoader.getSystemResource("dos.png"));
+		WIDTH = iconeDos.getIconWidth();
+		HEIGHT = iconeDos.getIconHeight();
 	}
 
 	public CCarte getControle() {
