@@ -57,12 +57,15 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	}
 
 	public void c2p_showEmpilable() {
+		getParent().setBackground(PColonne.EMPILABLE);
 	}
 
 	public void c2p_showNonEmpilable() {
+		getParent().setBackground(PColonne.NON_EMPILABLE);
 	}
 
 	public void c2p_showNeutre() {
+		getParent().setBackground(PColonne.NEUTRE);
 	}
 
 	public void c2p_dropKO() {

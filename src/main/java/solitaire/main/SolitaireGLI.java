@@ -54,8 +54,8 @@ public class SolitaireGLI extends Solitaire {
 
 		for (TasDeCartesColorees t : pilesColorees) {
 			JPanel uneCouleur = new JPanel();
-			uneCouleur.setOpaque(false);
 			uneCouleur.setLayout(null);
+			uneCouleur.setBackground(PColonne.NEUTRE);
 			uneCouleur.setSize(PColonne.WIDTH, PSabot.HEIGHT);
 			uneCouleur.setPreferredSize(uneCouleur.getSize());
 			uneCouleur.setBorder(BorderFactory.createLineBorder(Color.black));
