@@ -103,7 +103,7 @@ public class CColonne extends Colonne {
 			p.c2p_debutDnDOK(selectedCards.getPresentation());
 		}
 		else {
-			p.c2p_debutDnDOK(selectedCards.getPresentation());
+			p.c2p_debutDnDKO(selectedCards.getPresentation());
 		}
 	}
 

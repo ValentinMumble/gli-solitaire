@@ -68,14 +68,12 @@ public class PTasDeCartes extends JPanel implements Transferable {
 		Object result = null;
 		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
 			result = this;
-		} else {
-			result = null;
 		}
 		return result;
 	}
 
 	public DataFlavor[] getTransferDataFlavors() {
-		DataFlavor data[] = new DataFlavor[1];
+		DataFlavor data[] = new DataFlavor[2];
 		try {
 			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
 		} catch (java.lang.ClassNotFoundException e) {
@@ -84,10 +82,6 @@ public class PTasDeCartes extends JPanel implements Transferable {
 	}
 
 	public boolean isDataFlavorSupported(DataFlavor flavor) {
-		if ((flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType))) {
-			return (true);
-		} else {
-			return (false);
-		}
+		return (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType));
 	}
 }

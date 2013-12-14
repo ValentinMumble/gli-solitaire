@@ -1,6 +1,7 @@
 package solitaire.presentation;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
@@ -46,6 +47,7 @@ public class PColonne extends JPanel {
 	protected DragGestureEvent theInitialEvent;
 	protected DragSource ds = null;
 	private PCarte selectedCard;
+	private PTasDeCartes selecCards;
 	protected MyDragSourceMotionListener myDragSourceMotionListener = null;
 
 	private int offsetx;
@@ -108,7 +110,9 @@ public class PColonne extends JPanel {
 
 	class MyDragSourceMotionListener implements DragSourceMotionListener {
 		public void dragMouseMoved(DragSourceDragEvent event) {
-			selectedCard.setLocation(1 + event.getX(), 1 + event.getY());
+			Point p = getParent().getParent().getLocationOnScreen();
+			selecCards.setLocation(event.getX()-p.x-35, event.getY()-p.y-48);	
+			repaint();
 		}
 	}
 
@@ -129,6 +133,9 @@ public class PColonne extends JPanel {
 
 	public void c2p_debutDnDOK(PTasDeCartes pt) {
 		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, pt, dsl);
+		selecCards = pt;
+		getRootPane().add(selecCards,0);
+		repaint();
 	}
 
 	public void c2p_debutDnDKO(PTasDeCartes pt) {
@@ -178,7 +185,6 @@ public class PColonne extends JPanel {
 		public void drop(DropTargetDropEvent event) {
 			theFinalEvent = event;
 			controle.p2c_drop((CTasDeCartes) pc.getControle());
-
 		}
 
 		public void dropActionChanged(DropTargetDragEvent arg0) {

@@ -2,7 +2,12 @@ package solitaire.main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.IOException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -33,6 +38,7 @@ public class SolitaireGLI extends Solitaire {
 		super.initialiser();
 
 	}
+	
 
 	public static void main(String args[]) {
 		JPanel sabot = new JPanel();
@@ -42,9 +48,8 @@ public class SolitaireGLI extends Solitaire {
 		JFrame f = new JFrame("Solitaire");
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setLayout(new BorderLayout()); // au lieu de BorderLayout par defaut
-		f.getContentPane().setBackground(new Color(143, 143, 195)); // violet
-																	// pele
-
+		f.getContentPane().setBackground(new Color(143, 143, 195)); // violet pele
+		
 		// Creation des usines
 		CUsine cu = new CUsine();
 
@@ -97,6 +102,7 @@ public class SolitaireGLI extends Solitaire {
 		f.pack(); // dimensionner le cadre
 		f.setLocation(200, 100); // le positionner
 		f.setVisible(true); // et le rendre visible
+		f.setResizable(false);
 		solitaire.jouer();
 	} // main
 

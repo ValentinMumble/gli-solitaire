@@ -1,6 +1,7 @@
 package solitaire.presentation;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -75,8 +76,9 @@ public class PSabot extends JPanel {
 
 	class MyDragSourceMotionListener implements DragSourceMotionListener {
 		public void dragMouseMoved(DragSourceDragEvent event) {
-			selected.setLocation(1 + event.getX() - (selected.getWidth() / 2),
-					1 + event.getY() - 10);
+			Point p = getParent().getParent().getLocationOnScreen();
+			selected.setLocation(event.getX()-p.x-35, event.getY()-p.y-48);	
+			repaint();
 		}
 	}
 
@@ -161,12 +163,21 @@ public class PSabot extends JPanel {
 
 	}
 
-	public void c2p_debutDnDOK(CTasDeCartes ct) {
+	public void c2p_debutDnDOK(PTasDeCartes pt) {
 		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop,
-				ct.getPresentation(), dsl);
+				pt, dsl);
+		CTasDeCartes ct = (CTasDeCartes) pt.getControle();
+		try {
+			CCarte cc = (CCarte)ct.getSommet();
+			selected = cc.getPresentation();
+			getRootPane().add(selected,0);
+			repaint();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void c2p_debutDnDKO(CTasDeCartes ct) {
+	public void c2p_debutDnDKO(PTasDeCartes pt) {
 
 	}
 

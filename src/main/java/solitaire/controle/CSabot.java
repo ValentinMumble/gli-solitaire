@@ -69,9 +69,9 @@ public class CSabot extends Sabot {
 			selectedCards.empiler(cc);
 			if (cc == getSommet()){
 				depiler();
-				p.c2p_debutDnDOK(selectedCards);
+				p.c2p_debutDnDOK(selectedCards.getPresentation());
 			} else {
-				p.c2p_debutDnDKO(selectedCards);
+				p.c2p_debutDnDKO(selectedCards.getPresentation());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
