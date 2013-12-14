@@ -64,7 +64,7 @@ public class PColonne extends JPanel {
 		add(cachees);
 		add(visibles, 0);
 		offsetx = (WIDTH - PCarte.WIDTH) / 2;
-		cachees.setLocation(offsetx, 0);
+		cachees.setLocation(offsetx, offsetx);
 		cachees.setDxDy(0, DY);
 		visibles.setDxDy(0, DY);
 
@@ -217,7 +217,7 @@ public class PColonne extends JPanel {
 	}
 
 	public void setCorrectLocation() {
-		visibles.setLocation(offsetx, cachees.getHeight() - (PCarte.HEIGHT));
+		visibles.setLocation(offsetx, offsetx + cachees.getHeight() - (PCarte.HEIGHT));
 	}
 
 	public void setCorrectSize(int i, int j) {
