@@ -44,10 +44,7 @@ public class SolitaireGLI extends Solitaire {
 	public void initialiser() {
 		super.initialiser();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setLayout(new BorderLayout()); // au lieu de BorderLayout par
-												// defaut
-		frame.getContentPane().setBackground(new Color(0, 102, 0)); // violet
-																	// pele
+		frame.getContentPane().setBackground(new Color(0, 102, 0)); 
 
 		colonnes.setOpaque(false);
 		haut.setOpaque(false);
