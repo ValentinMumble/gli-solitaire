@@ -22,8 +22,10 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import solitaire.controle.CCarte;
 import solitaire.controle.CColonne;
 import solitaire.controle.CTasDeCartes;
+import solitaire.controle.CUsine;
 
 public class PColonne extends JPanel {
 
@@ -145,6 +147,7 @@ public class PColonne extends JPanel {
 	protected class MyDragSourceListener implements DragSourceListener {
 		public void dragDropEnd(DragSourceDropEvent event) {
 			controle.p2c_dragDropEnd(event.getDropSuccess());
+			getRootPane().repaint();
 		}
 
 		public void dragEnter(DragSourceDragEvent event) {
