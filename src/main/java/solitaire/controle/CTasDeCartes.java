@@ -29,5 +29,9 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes {
 	public PTasDeCartes getPresentation() {
 		return p;
 	}
+	
+	public void setDxDy(int x, int y){
+		p.setDxDy(x, y);
+	}
 
 }

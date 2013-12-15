@@ -111,8 +111,8 @@ public class PColonne extends JPanel {
 	class MyDragSourceMotionListener implements DragSourceMotionListener {
 		public void dragMouseMoved(DragSourceDragEvent event) {
 			Point p = getParent().getParent().getLocationOnScreen();
-			selecCards.setLocation(event.getX() - p.x - PCarte.WIDTH / 2,
-					event.getY() - p.y - PCarte.HEIGHT / 2);
+			selecCards.setLocation(event.getX() - p.x - PCarte.WIDTH / 2, 
+			event.getY() - p.y - PCarte.HEIGHT / 2);
 			repaint();
 		}
 	}
@@ -153,6 +153,7 @@ public class PColonne extends JPanel {
 		}
 
 		public void dragExit(DragSourceEvent event) {
+			repaint();
 		}
 
 		public void dragOver(DragSourceDragEvent event) {
