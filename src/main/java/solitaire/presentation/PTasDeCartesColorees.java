@@ -29,6 +29,9 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	protected class MyDropTargetListener implements DropTargetListener {
 		PTasDeCartes pc;
 
+		/**
+		 * Signale au controleur qu'un tas de carte lui passe au dessus
+		 */
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
 				pc = (PTasDeCartes) event.getTransferable().getTransferData(
@@ -47,6 +50,9 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		public void dragOver(DropTargetDragEvent event) {
 		}
 
+		/**
+		 * Signale au controleur qu'un tas de carte a ete pose
+		 */
 		public void drop(DropTargetDropEvent event) {
 			theFinalEvent = event;
 			controle.p2c_drop((CTasDeCartes) pc.getControle());
@@ -56,14 +62,23 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		}
 	}
 
+	/**
+	 * Appelee par le controleur pour montrer que ce tas peut recevoir un tas de cartes
+	 */
 	public void c2p_showEmpilable() {
 		getParent().setBackground(PColonne.EMPILABLE);
 	}
 
+	/**
+	 * Appelee par le controleur pour montrer que ce tas ne peut pas recevoir un tas de cartes
+	 */
 	public void c2p_showNonEmpilable() {
 		getParent().setBackground(PColonne.NON_EMPILABLE);
 	}
 
+	/**
+	 * Appelee par le controleur pour montrer que le tas est neutre
+	 */
 	public void c2p_showNeutre() {
 		getParent().setBackground(PColonne.NEUTRE);
 	}

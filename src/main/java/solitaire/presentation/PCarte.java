@@ -67,9 +67,6 @@ public class PCarte extends JPanel implements Transferable {
 		dos.setVisible(!faceVisible);
 	}
 
-	// public final CCarte getControle () {
-	// return (controle) ;
-	// }
 	public ImageIcon getIcone() {
 		return icone;
 	}
@@ -83,10 +80,17 @@ public class PCarte extends JPanel implements Transferable {
 		HEIGHT = iconeDos.getIconHeight();
 	}
 
+	/**
+	 * 
+	 * @return le controleur correspondant a cette PCarte
+	 */
 	public CCarte getControle() {
 		return controle;
 	}
 
+	/**
+	 * Retourne this si la flavor demandee correspond au type objet
+	 */
 	public Object getTransferData(DataFlavor flavor)
 			throws UnsupportedFlavorException, IOException {
 		Object result = null;
@@ -96,6 +100,9 @@ public class PCarte extends JPanel implements Transferable {
 		return result;
 	}
 
+	/**
+	 * Retourne les types de flavor supportes
+	 */
 	public DataFlavor[] getTransferDataFlavors() {
 		DataFlavor data[] = new DataFlavor[2];
 		try {
@@ -105,8 +112,11 @@ public class PCarte extends JPanel implements Transferable {
 		return (data);
 	}
 
+	/**
+	 * Retourne vrai si la flavor passee en parametre est supportee (Local Object ici)
+	 */
 	public boolean isDataFlavorSupported(DataFlavor flavor) {
 		return (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType));
 	}
 
-} // PCarte
+}

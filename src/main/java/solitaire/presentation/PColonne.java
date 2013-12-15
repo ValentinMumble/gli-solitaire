@@ -29,9 +29,19 @@ public class PColonne extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * La largeur d'une colonne
+	 */
 	public static final int WIDTH = 90;
 
+	/**
+	 * Le decalage vertical entre chaque carte de la colonne
+	 */
 	public static final int DY = 15;
+	
+	/**
+	 * Couleur correspondant aux differents statuts de la colonne
+	 */
 	public static final Color NEUTRE = new Color(0, 90, 0);
 	public static final Color EMPILABLE = new Color(0, 51, 102);
 	public static final Color NON_EMPILABLE = new Color(102, 0, 0);
@@ -68,6 +78,7 @@ public class PColonne extends JPanel {
 		cachees.setDxDy(0, DY);
 		visibles.setDxDy(0, DY);
 
+		// Initialisation et liaison des listeners pour le Drag n drop
 		dropTarget = new DropTarget(visibles, new MyDropTargetListener());
 		ds = new DragSource();
 		ds.addDragSourceListener(new MyDragSourceListener());
@@ -109,6 +120,9 @@ public class PColonne extends JPanel {
 	}
 
 	class MyDragSourceMotionListener implements DragSourceMotionListener {
+		/**
+		 * Deplace et redessine le tas de carte en cours de drag
+		 */
 		public void dragMouseMoved(DragSourceDragEvent event) {
 			Point p = getParent().getParent().getLocationOnScreen();
 			selecCards.setLocation(event.getX() - p.x - PCarte.WIDTH / 2, 
@@ -118,6 +132,10 @@ public class PColonne extends JPanel {
 	}
 
 	protected class MyDragGestureListener implements DragGestureListener {
+		
+		/**
+		 * Memorise la carte selectionnee pour le DnD et signale a son controle que le DnD commence
+		 */
 		public void dragGestureRecognized(DragGestureEvent dge) {
 			theInitialEvent = dge;
 			selectedCard = null;
@@ -125,13 +143,17 @@ public class PColonne extends JPanel {
 				selectedCard = (PCarte) visibles.getComponentAt(dge
 						.getDragOrigin());
 			} catch (Exception e) {
-				e.printStackTrace();
 			}
 
 			controle.p2c_debutDnd(selectedCard.getControle());
 		}
 	}
 
+	/**
+	 * Le controleur appelle cette methode quand le DnD est demarre.
+	 * Stocke le tas de cartes en cours de Drag, l'ajoute au panel principal et le dessine
+	 * @param pt
+	 */
 	public void c2p_debutDnDOK(PTasDeCartes pt) {
 		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, pt, dsl);
 		selecCards = pt;
@@ -166,6 +188,9 @@ public class PColonne extends JPanel {
 	protected class MyDropTargetListener implements DropTargetListener {
 		PTasDeCartes pc;
 
+		/**
+		 * Signale au controleur qu'un tas de carte lui passe au dessus
+		 */
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
 				pc = (PTasDeCartes) event.getTransferable().getTransferData(
@@ -185,6 +210,9 @@ public class PColonne extends JPanel {
 
 		}
 
+		/**
+		 * Signale au controleur qu'un tas de carte a ete pose
+		 */
 		public void drop(DropTargetDropEvent event) {
 			theFinalEvent = event;
 			controle.p2c_drop((CTasDeCartes) pc.getControle());
@@ -196,14 +224,23 @@ public class PColonne extends JPanel {
 
 	}
 
+	/**
+	 * Appelee par le controleur pour montrer que cette colonne peut recevoir un tas de cartes
+	 */
 	public void c2p_showEmpilable() {
 		setBackground(EMPILABLE);
 	}
 
+	/**
+	 * Appelee par le controleur pour montrer que cette colonne ne peut pas recevoir un tas de cartes
+	 */
 	public void c2p_showNonEmpilable() {
 		setBackground(NON_EMPILABLE);
 	}
 
+	/**
+	 * Appelee par le controleur pour montrer que la colonne est neutre
+	 */
 	public void c2p_showNeutre() {
 		setBackground(NEUTRE);
 	}
@@ -217,10 +254,18 @@ public class PColonne extends JPanel {
 		theFinalEvent.getDropTargetContext().dropComplete(true);
 	}
 
+	/**
+	 * Deplace le tas de cartes visibles au bon endroit quand des cartes sont retournees
+	 */
 	public void setCorrectLocation() {
 		visibles.setLocation(offsetx, offsetx + cachees.getHeight() - (PCarte.HEIGHT));
 	}
 
+	/**
+	 * Modifie la taille du tas de cartes visibles
+	 * @param i
+	 * @param j
+	 */
 	public void setCorrectSize(int i, int j) {
 		visibles.setSize(i, j);
 	}

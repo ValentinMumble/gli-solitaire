@@ -12,8 +12,20 @@ import solitaire.controle.ICTasDeCartes;
 public class PTasDeCartes extends JPanel implements Transferable {
 
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Le decalage a appliquer horizontalement
+	 */
 	private int dx;
+	
+	/**
+	 * Le decalage a appliquer verticalement
+	 */
 	private int dy;
+	
+	/**
+	 * La position du tas de cartes
+	 */
 	private int x;
 	private int y;
 
@@ -31,6 +43,10 @@ public class PTasDeCartes extends JPanel implements Transferable {
 		y = 0;
 	}
 
+	/**
+	 * Supprime la carte du tas et met a jour la position du tas ainsi que sa taille
+	 * @param pc
+	 */
 	public void depiler(PCarte pc) {
 		remove(pc);
 		x -= dx;
@@ -40,6 +56,10 @@ public class PTasDeCartes extends JPanel implements Transferable {
 		repaint();
 	}
 
+	/**
+	 * Ajoute la carte au tas et met a jour sa position ainsi que sa taille
+	 * @param pCarte
+	 */
 	public void empiler(PCarte pCarte) {
 		add(pCarte, 0);
 		pCarte.setLocation(x, y);
@@ -63,6 +83,9 @@ public class PTasDeCartes extends JPanel implements Transferable {
 		return controle;
 	}
 
+	/**
+	 * Retourne this si la flavor demandee correspond au type objet
+	 */
 	public Object getTransferData(DataFlavor flavor)
 			throws UnsupportedFlavorException, IOException {
 		Object result = null;
@@ -72,6 +95,9 @@ public class PTasDeCartes extends JPanel implements Transferable {
 		return result;
 	}
 
+	/**
+	 * Retourne les types de flavor supportes
+	 */
 	public DataFlavor[] getTransferDataFlavors() {
 		DataFlavor data[] = new DataFlavor[2];
 		try {
@@ -81,6 +107,9 @@ public class PTasDeCartes extends JPanel implements Transferable {
 		return (data);
 	}
 
+	/**
+	 * Retourne vrai si la flavor passee en parametre est supportee (Local Object ici)
+	 */
 	public boolean isDataFlavorSupported(DataFlavor flavor) {
 		return (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType));
 	}

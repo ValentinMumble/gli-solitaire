@@ -25,6 +25,10 @@ public class PSabot extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public static final int HEIGHT = 110;
+	
+	/**
+	 * Le decalage horizontal entre chaque carte retournee du sabot
+	 */
 	public static final int DX = 15;
 
 	private CSabot controle;
@@ -77,6 +81,9 @@ public class PSabot extends JPanel {
 	}
 
 	class MyDragSourceMotionListener implements DragSourceMotionListener {
+		/**
+		 * Deplace et redessine le tas de carte en cours de drag
+		 */
 		public void dragMouseMoved(DragSourceDragEvent event) {
 			Point p = getParent().getParent().getLocationOnScreen();
 			selected.setLocation(event.getX() - p.x - PCarte.WIDTH / 2,
@@ -86,6 +93,9 @@ public class PSabot extends JPanel {
 	}
 
 	protected class MyDragGestureListener implements DragGestureListener {
+		/**
+		 * Memorise la carte selectionnee pour le DnD et signale a son controle que le DnD commence
+		 */
 		public void dragGestureRecognized(DragGestureEvent dge) {
 			theInitialEvent = dge;
 			selected = null;
@@ -168,6 +178,11 @@ public class PSabot extends JPanel {
 
 	}
 
+	/**
+	 * Le controleur appelle cette methode quand le DnD est demarre.
+	 * Stocke le tas de cartes en cours de Drag, l'ajoute au panel principal et le dessine
+	 * @param pt
+	 */
 	public void c2p_debutDnDOK(PTasDeCartes pt) {
 		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, pt, dsl);
 		CTasDeCartes ct = (CTasDeCartes) pt.getControle();
