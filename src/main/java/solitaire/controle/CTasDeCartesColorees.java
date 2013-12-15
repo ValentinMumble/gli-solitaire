@@ -9,11 +9,13 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 
 	private PTasDeCartesColorees p;
 
+	// Constructeur du CTasDeCartesColorees de nom nom, de couleur c et d'usine u.
 	public CTasDeCartesColorees(String nom, int c, CUsine u) {
 		super(nom, c, u);
 		p = new PTasDeCartesColorees(this);
 	}
 
+	// depiler permet de retirer la carte au sommet de la pile
 	@Override
 	public void depiler() throws Exception {
 		Carte s = getSommet();
@@ -21,6 +23,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 		p.depiler(((CCarte) s).getPresentation());
 	}
 
+	// empiler ajoute une presentation de carte à la présentation associée au CTasDeCartesColorees
 	public void empiler(CCarte cc) {
 		if (isEmpilable(cc)) {
 			super.empiler(cc);
@@ -28,10 +31,12 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 		}
 	}
 
+	//  getPresentation permet d'obtenir la présentation associée au CTasDeCartesColorees
 	public PTasDeCartesColorees getPresentation() {
 		return p;
 	}
 
+	//  p2c_dragEnter permet d'appeler la méthode d'affichage lié à la possibilité de drag ou non. (Bleu/Rouge)
 	public void p2c_dragEnter(CTasDeCartes ct) {
 		Carte c;
 		try {
@@ -46,10 +51,12 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 
 	}
 
+	// p2c_dragExit permet d'appeler la méthode d'affichage du background neutre lié au drag
 	public void p2c_dragExit(CTasDeCartes ct) {
 		p.c2p_showNeutre();
 	}
 
+	// p2c_drop empile la carte si c'est possible et le Drop s'est bien passé (OK) sinon si la carte n'est pas empilable le drop est KO.
 	public void p2c_drop(CTasDeCartes ct) {
 		Carte c;
 		try {

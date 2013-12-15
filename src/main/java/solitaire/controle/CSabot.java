@@ -9,11 +9,13 @@ public class CSabot extends Sabot {
 	private PSabot p;
 	private CTasDeCartes selectedCards;
 
+	// Constructeur du CSabot de nom nom et d'usine u
 	public CSabot(String nom, CUsine u) {
 		super(nom, u);
 		p = new PSabot(this, ((CTasDeCartes) cachees).getPresentation(), ((CTasDeCartes) visibles).getPresentation());
 	}
 	
+	// setReserve recopie un tas de cartes dans le tas de cartes cachées du CSabot
 	public void setReserve(Tas t) {
 		super.setReserve(t);
 		if (isCarteRetournable()) {
@@ -21,6 +23,7 @@ public class CSabot extends Sabot {
 		}
 	}
 	
+	// retourner permet de le sabot
 	public void retourner() {
 		try {
 			super.retourner();
@@ -35,6 +38,7 @@ public class CSabot extends Sabot {
 		}
 	}
 	
+	// retournerCarte permet de retourner une carte
 	public void retournerCarte() {
 		try {
 			super.retournerCarte();
@@ -48,6 +52,7 @@ public class CSabot extends Sabot {
 		
 	}
 	
+	// depiler permet de retirer la carte au sommet de la pile
 	public void depiler() {
 		try {
 			super.depiler();
@@ -59,10 +64,12 @@ public class CSabot extends Sabot {
 		}
 	}
 	
+	// getPresentation permet de récupérer la présentation associée au CSabot
 	public PSabot getPresentation() {
 		return p;
 	}
 
+	// p2c_debutDnd récupére la selectedCard sélectionné et l'ajoute dans un CTasDeCartes
 	public void p2c_debutDnd(CCarte cc) {
 		try {
 			selectedCards = new CTasDeCartes("tas", new CUsine());
@@ -78,6 +85,7 @@ public class CSabot extends Sabot {
 		}
 	}
 
+	// p2c_dragDropEnd réempile les cartes sélectionnés si il y a une erreur lors du drop
 	public void p2c_dragDropEnd(boolean dropSuccess) {
 		if (! dropSuccess){
 			empiler(selectedCards);
