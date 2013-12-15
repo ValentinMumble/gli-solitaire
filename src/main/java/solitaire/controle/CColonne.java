@@ -77,7 +77,6 @@ public class CColonne extends Colonne {
 		try {
 			CCarte curCCarte = null;
 			selectedCards = new CTasDeCartes("tas", new CUsine());
-			selectedCards.setDxDy(0, 15);
 			curCCarte = (CCarte) (visibles.getSommet());
 			selectedCards.empiler(curCCarte);
 			depiler();
@@ -87,7 +86,6 @@ public class CColonne extends Colonne {
 				depiler();
 			}
 			selectedCardsbis = new CTasDeCartes("tasbis", new CUsine());
-			selectedCardsbis.setDxDy(0, 15);
 			while (selectedCards.getNombre() != 0) {
 				CCarte curCCartebis = (CCarte) (selectedCards.getSommet());
 				selectedCardsbis.empiler(curCCartebis);

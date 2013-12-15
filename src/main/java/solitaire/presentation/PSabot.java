@@ -103,14 +103,12 @@ public class PSabot extends JPanel {
 	protected class MyDragSourceListener implements DragSourceListener {
 		public void dragDropEnd(DragSourceDropEvent event) {
 			controle.p2c_dragDropEnd(event.getDropSuccess());
-			getRootPane().repaint();
 		}
 
 		public void dragEnter(DragSourceDragEvent event) {
 		}
 
 		public void dragExit(DragSourceEvent event) {
-			repaint();
 		}
 
 		public void dragOver(DragSourceDragEvent event) {
