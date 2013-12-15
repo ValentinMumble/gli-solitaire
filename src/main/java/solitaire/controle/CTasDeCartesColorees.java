@@ -8,6 +8,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 		ICTasDeCartes {
 
 	private PTasDeCartesColorees p;
+	private CTasDeCartes selectedCards;
 
 	// Constructeur du CTasDeCartesColorees de nom nom, de couleur c et d'usine u.
 	public CTasDeCartesColorees(String nom, int c, CUsine u) {
@@ -72,5 +73,28 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 		p.c2p_showNeutre();
 
 	}
+	
+	// p2c_debutDnd récupére la selectedCard sélectionné et l'ajoute dans un CTasDeCartes
+		public void p2c_debutDnd(CCarte cc) {
+			try {
+				selectedCards = new CTasDeCartes("tas", new CUsine());
+				selectedCards.empiler(cc);
+				if (cc == getSommet()){
+					depiler();
+					p.c2p_debutDnDOK(selectedCards.getPresentation());
+				} else {
+					p.c2p_debutDnDKO(selectedCards.getPresentation());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// p2c_dragDropEnd réempile les cartes sélectionnés si il y a une erreur lors du drop
+		public void p2c_dragDropEnd(boolean dropSuccess) {
+			if (! dropSuccess){
+				empiler(selectedCards);
+			}
+		}
 
 }
