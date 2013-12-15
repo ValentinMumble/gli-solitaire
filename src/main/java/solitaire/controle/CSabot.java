@@ -34,7 +34,6 @@ public class CSabot extends Sabot {
 				p.activerRetournerCarte();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -47,7 +46,6 @@ public class CSabot extends Sabot {
 				p.activerRetournerTas();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 	}
@@ -60,7 +58,6 @@ public class CSabot extends Sabot {
 				p.desactiverRetournerTas();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -81,7 +78,6 @@ public class CSabot extends Sabot {
 				p.c2p_debutDnDKO(selectedCards.getPresentation());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 

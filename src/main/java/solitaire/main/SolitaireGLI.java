@@ -62,7 +62,7 @@ public class SolitaireGLI extends Solitaire {
 
 			PTasDeCartes presentation = ((CTasDeCartesColorees) t)
 					.getPresentation();
-			uneCouleur.add(presentation);
+			uneCouleur.add(presentation, 0);
 			int x = uneCouleur.getWidth() / 2 - presentation.getWidth() / 2;
 			int y = uneCouleur.getHeight() / 2 - presentation.getHeight() / 2;
 			presentation.setLocation(x, y);
@@ -74,11 +74,10 @@ public class SolitaireGLI extends Solitaire {
 			JLabel labelImage = new JLabel(image);
 			labelImage.setSize(image.getIconWidth(), image.getIconHeight());
 			labelImage.setPreferredSize(labelImage.getSize());
-			uneCouleur.add(labelImage);
+			uneCouleur.add(labelImage, -1);
 			x = uneCouleur.getWidth() / 2 - labelImage.getWidth() / 2;
 			y = uneCouleur.getHeight() / 2 - labelImage.getHeight() / 2;
 			labelImage.setLocation(x, y);
-
 			couleurs.add(uneCouleur);
 		}
 

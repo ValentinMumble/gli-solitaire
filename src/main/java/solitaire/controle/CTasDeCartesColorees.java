@@ -86,7 +86,6 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 					p.c2p_debutDnDKO(selectedCards.getPresentation());
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 

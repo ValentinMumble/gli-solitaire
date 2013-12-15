@@ -30,7 +30,6 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 				p.empiler(((CCarte) c).getPresentation());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 

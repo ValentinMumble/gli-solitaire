@@ -106,7 +106,6 @@ public class CColonne extends Colonne {
 			selectedCards = selectedCardsbis;
 
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		if (selectedCards.getNombre() > 0) {
 			p.c2p_debutDnDOK(selectedCards.getPresentation());

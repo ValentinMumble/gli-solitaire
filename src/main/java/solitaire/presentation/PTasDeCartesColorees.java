@@ -71,7 +71,6 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 				selected = cc.getPresentation();
 				controle.p2c_debutDnd(cc);
 			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 	}
@@ -177,7 +176,6 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 			getRootPane().add(selected, 0);
 			repaint();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
