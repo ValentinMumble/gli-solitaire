@@ -21,7 +21,7 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes {
 		p.depiler(((CCarte) s).getPresentation());
 	}
 	
-	// empiler ajoute une presentation de carte à la présentation associée au CTasDeCartes
+	// empiler ajoute une presentation de carte √† la pr√©sentation associ√©e au CTasDeCartes
 	public void empiler(Carte c) {
 		if (isEmpilable(c)) {
 			super.empiler(c);
@@ -29,12 +29,12 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes {
 		}
 	}
 
-	//  getPresentation permet d'obtenir la présentation associée au CTasDeCartes
+	//  getPresentation permet d'obtenir la pr√©sentation associ√©e au CTasDeCartes
 	public PTasDeCartes getPresentation() {
 		return p;
 	}
 	
-	//  setDxDy permet de modifier le Dx et le Dy pour l'affichage des tas draggés
+	//  setDxDy permet de modifier le Dx et le Dy pour l'affichage des tas dragg√©s
 	public void setDxDy(int x, int y){
 		p.setDxDy(x, y);
 	}

@@ -20,7 +20,7 @@ public class CCarte extends Carte {
 		p.setFaceVisible(isFaceVisible());
 	}
 	
-	// getPresentation retourne la présentation associée à la CCarte
+	// getPresentation retourne la pr√©sentation associ√©e √† la CCarte
 	public PCarte getPresentation() {
 		return p;
 	}

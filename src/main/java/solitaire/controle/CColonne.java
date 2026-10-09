@@ -17,7 +17,7 @@ public class CColonne extends Colonne {
 				((CTasDeCartesAlternees) visibles).getPresentation());
 	}
 
-	// setReserve recopie un tas de cartes dans le tas de cartes cachées de la CColonne
+	// setReserve recopie un tas de cartes dans le tas de cartes cach√©es de la CColonne
 	public void setReserve(Tas t) {
 		super.setReserve(t);
 		if (isCarteRetournable()) {
@@ -26,7 +26,7 @@ public class CColonne extends Colonne {
 		p.setCorrectLocation();
 	}
 
-	// depiler permet de retirer la carte au sommet de la pile et d'activer le retournement d'une carte cachée
+	// depiler permet de retirer la carte au sommet de la pile et d'activer le retournement d'une carte cach√©e
 	@Override
 	public void depiler() throws Exception {
 		super.depiler();
@@ -45,12 +45,12 @@ public class CColonne extends Colonne {
 		p.desactiverRetournerCarte();
 	}
 
-	// getPresentation permet de récupérer la présentation associée à la CColonne
+	// getPresentation permet de r√©cup√©rer la pr√©sentation associ√©e √† la CColonne
 	public PColonne getPresentation() {
 		return p;
 	}
 
-	//  p2c_dragEnter permet d'appeler la méthode d'affichage lié à la possibilité de drag ou non. (Bleu/Rouge)
+	//  p2c_dragEnter permet d'appeler la m√©thode d'affichage li√© √† la possibilit√© de drag ou non. (Bleu/Rouge)
 	public void p2c_dragEnter(CTasDeCartes ct) {
 		try {
 			if (isEmpilable(ct.getBase())) {
@@ -62,12 +62,12 @@ public class CColonne extends Colonne {
 		}
 	}
 
-	// p2c_dragExit permet d'appeler la méthode d'affichage du background neutre lié au drag
+	// p2c_dragExit permet d'appeler la m√©thode d'affichage du background neutre li√© au drag
 	public void p2c_dragExit(CTasDeCartes ct) {
 		p.c2p_showNeutre();
 	}
 
-	// p2c_drop empile la carte si c'est possible et le Drop s'est bien passé (OK) sinon si la carte n'est pas empilable le drop est KO.
+	// p2c_drop empile la carte si c'est possible et le Drop s'est bien pass√© (OK) sinon si la carte n'est pas empilable le drop est KO.
 	public void p2c_drop(CTasDeCartes ct) {
 		try {
 			if (isEmpilable(ct)) {
@@ -81,7 +81,7 @@ public class CColonne extends Colonne {
 		p.c2p_showNeutre();
 	}
 
-	// p2c_debutDnd récupére la selectedCard sélectionné ou le tas au dessus de la selectedCard si elle n'est en premier plan
+	// p2c_debutDnd r√©cup√©re la selectedCard s√©lectionn√© ou le tas au dessus de la selectedCard si elle n'est en premier plan
 	public void p2c_debutDnd(CCarte selectedCard) {
 		try {
 			CCarte curCCarte = null;
@@ -114,7 +114,7 @@ public class CColonne extends Colonne {
 		}
 	}
 
-	// p2c_dragDropEnd réempile les cartes sélectionnés si il y a une erreur lors du drop
+	// p2c_dragDropEnd r√©empile les cartes s√©lectionn√©s si il y a une erreur lors du drop
 	public void p2c_dragDropEnd(boolean dropSuccess) {
 		if (!dropSuccess) {
 			empiler(selectedCards);

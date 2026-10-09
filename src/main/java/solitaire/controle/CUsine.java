@@ -10,7 +10,7 @@ import solitaire.application.Usine;
 
 public class CUsine extends Usine {
 
-	// Usine des différents éléments du Solitaire.
+	// Usine des diff√©rents √©l√©ments du Solitaire.
 	
 	@Override
 	public Carte newCarte(int v, int c) {

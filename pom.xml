@@ -6,34 +6,60 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>21</jdk.version>
+	</properties>
+
+	<repositories>
+		<!-- The game logic (solitaire.application) is not on Maven Central: the jar from lib/ is served from this folder -->
+		<repository>
+			<id>project-local</id>
+			<url>file://${project.basedir}/repo</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>istic</groupId>
+			<artifactId>solitaire-application</artifactId>
+			<version>2004</version>
+		</dependency>
+	</dependencies>
+
 	<build>
-
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.13.0</version>
 				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
+					<release>${jdk.version}</release>
 				</configuration>
 			</plugin>
 
+			<!-- One runnable jar with the game logic inside -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<archive>
-						<manifest>
-							solitaire.application
-							<mainClass>solitaire.main.SolitaireGLI</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.6.0</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>solitaire.main.SolitaireGLI</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 </project>

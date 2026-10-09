@@ -24,7 +24,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 		p.depiler(((CCarte) s).getPresentation());
 	}
 
-	// empiler ajoute une presentation de carte à la présentation associée au CTasDeCartesColorees
+	// empiler ajoute une presentation de carte √† la pr√©sentation associ√©e au CTasDeCartesColorees
 	public void empiler(CCarte cc) {
 		if (isEmpilable(cc)) {
 			super.empiler(cc);
@@ -32,12 +32,12 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 		}
 	}
 
-	//  getPresentation permet d'obtenir la présentation associée au CTasDeCartesColorees
+	//  getPresentation permet d'obtenir la pr√©sentation associ√©e au CTasDeCartesColorees
 	public PTasDeCartesColorees getPresentation() {
 		return p;
 	}
 
-	//  p2c_dragEnter permet d'appeler la méthode d'affichage lié à la possibilité de drag ou non. (Bleu/Rouge)
+	//  p2c_dragEnter permet d'appeler la m√©thode d'affichage li√© √† la possibilit√© de drag ou non. (Bleu/Rouge)
 	public void p2c_dragEnter(CTasDeCartes ct) {
 		Carte c;
 		try {
@@ -52,12 +52,12 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 
 	}
 
-	// p2c_dragExit permet d'appeler la méthode d'affichage du background neutre lié au drag
+	// p2c_dragExit permet d'appeler la m√©thode d'affichage du background neutre li√© au drag
 	public void p2c_dragExit(CTasDeCartes ct) {
 		p.c2p_showNeutre();
 	}
 
-	// p2c_drop empile la carte si c'est possible et le Drop s'est bien passé (OK) sinon si la carte n'est pas empilable le drop est KO.
+	// p2c_drop empile la carte si c'est possible et le Drop s'est bien pass√© (OK) sinon si la carte n'est pas empilable le drop est KO.
 	public void p2c_drop(CTasDeCartes ct) {
 		Carte c;
 		try {
@@ -74,7 +74,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 
 	}
 	
-	// p2c_debutDnd récupére la selectedCard sélectionné et l'ajoute dans un CTasDeCartes
+	// p2c_debutDnd r√©cup√©re la selectedCard s√©lectionn√© et l'ajoute dans un CTasDeCartes
 		public void p2c_debutDnd(CCarte cc) {
 			try {
 				selectedCards = new CTasDeCartes("tas", new CUsine());
@@ -89,7 +89,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 			}
 		}
 
-		// p2c_dragDropEnd réempile les cartes sélectionnés si il y a une erreur lors du drop
+		// p2c_dragDropEnd r√©empile les cartes s√©lectionn√©s si il y a une erreur lors du drop
 		public void p2c_dragDropEnd(boolean dropSuccess) {
 			if (! dropSuccess){
 				empiler(selectedCards);
