@@ -8,3 +8,6 @@
 ehthumbs.db
 Thumbs.db
 /target
+
+# Maven shade plugin output
+dependency-reduced-pom.xml

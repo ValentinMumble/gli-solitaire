@@ -15,7 +15,7 @@ public class CSabot extends Sabot {
 		p = new PSabot(this, ((CTasDeCartes) cachees).getPresentation(), ((CTasDeCartes) visibles).getPresentation());
 	}
 	
-	// setReserve recopie un tas de cartes dans le tas de cartes cachées du CSabot
+	// setReserve recopie un tas de cartes dans le tas de cartes cach√©es du CSabot
 	public void setReserve(Tas t) {
 		super.setReserve(t);
 		if (isCarteRetournable()) {
@@ -61,12 +61,12 @@ public class CSabot extends Sabot {
 		}
 	}
 	
-	// getPresentation permet de récupérer la présentation associée au CSabot
+	// getPresentation permet de r√©cup√©rer la pr√©sentation associ√©e au CSabot
 	public PSabot getPresentation() {
 		return p;
 	}
 
-	// p2c_debutDnd récupére la selectedCard sélectionné et l'ajoute dans un CTasDeCartes
+	// p2c_debutDnd r√©cup√©re la selectedCard s√©lectionn√© et l'ajoute dans un CTasDeCartes
 	public void p2c_debutDnd(CCarte cc) {
 		try {
 			selectedCards = new CTasDeCartes("tas", new CUsine());
@@ -81,7 +81,7 @@ public class CSabot extends Sabot {
 		}
 	}
 
-	// p2c_dragDropEnd réempile les cartes sélectionnés si il y a une erreur lors du drop
+	// p2c_dragDropEnd r√©empile les cartes s√©lectionn√©s si il y a une erreur lors du drop
 	public void p2c_dragDropEnd(boolean dropSuccess) {
 		if (! dropSuccess){
 			empiler(selectedCards);

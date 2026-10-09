@@ -94,7 +94,7 @@ public class SolitaireGLI extends Solitaire {
 		frame.pack(); // dimensionner le cadre
 		frame.setLocation(200, 100); // le positionner
 		frame.setVisible(true); // et le rendre visible
-		frame.setResizable(false);
+		frame.setResizable(true);
 	}
 
 	public static void main(String args[]) {

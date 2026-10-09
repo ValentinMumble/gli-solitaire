@@ -22,7 +22,7 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 		p.depiler(((CCarte) s).getPresentation());
 	}
 
-	// empiler ajoute une presentation de carte à la présentation associée au CTasDeCartesAlternees
+	// empiler ajoute une presentation de carte √† la pr√©sentation associ√©e au CTasDeCartesAlternees
 	public void empiler(Carte c) {
 		super.empiler(c);
 		try {
@@ -33,7 +33,7 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 		}
 	}
 
-	//  getPresentation permet d'obtenir la présentation associée au CTasDeCartesAlternees
+	//  getPresentation permet d'obtenir la pr√©sentation associ√©e au CTasDeCartesAlternees
 	public PTasDeCartesAlternees getPresentation() {
 		return p;
 	}
